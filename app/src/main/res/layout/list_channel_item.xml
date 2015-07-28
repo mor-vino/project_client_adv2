@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/frag_channel_item">
+
+    <ImageView
+        android:id="@+id/frag_channel_item_imge_icon"
+        android:layout_width="25dp"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="12dp"
+        android:layout_centerVertical="true"
+        android:layout_alignParentLeft="true"
+        android:src="@mipmap/icon_channels_lg"
+        />
+    <TextView
+        android:id="@+id/frag_channel_item_text_id"
+        android:text="@string/titleOfChannel"
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:layout_centerVertical="true"
+        android:textColor="#FF0000"
+        android:textSize="30dp"
+        android:layout_toRightOf="@+id/frag_channel_item_imge_icon"
+        android:gravity="center_vertical"
+        />
+
+</RelativeLayout>

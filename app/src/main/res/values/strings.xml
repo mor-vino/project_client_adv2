@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">final_project_client_adv2</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="act_splash_changing_text">Final Project</string>
+
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_chat">ChatActivityActivity</string>
+    <string name="titleOfChannel">title</string>
+    <string name="title_activity_add_new_channel">AddNewChannelActivity</string>
+    <string name="title_activity_remove_channel">RemoveChannelActivity</string>
+    <string name="title_activity_test">TestActivity</string>
+    <string name="title_activity_tcp_client">TcpClient</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="title_activity_settings">SettingsActivity</string>
+</resources>

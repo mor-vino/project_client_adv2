@@ -1,0 +1,31 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/act_maps_land_channels_list"
+        android:layout_width="0dp"
+        android:layout_height="fill_parent"
+        android:layout_weight="1">
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/act_maps_left_layout_id"
+        android:layout_width="0dp"
+        android:layout_height="fill_parent"
+        android:layout_weight="2">
+        <fragment
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/act_maps_mapFragment_id"
+            android:layout_alignParentBottom="true"
+            tools:context="com.example.mor.final_project_client_adv2.MapsActivity"
+            android:name="com.google.android.gms.maps.SupportMapFragment"/>
+    </RelativeLayout>
+
+
+</LinearLayout>
+

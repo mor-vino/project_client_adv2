@@ -1,0 +1,37 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.mor.final_project_client_adv2.LoginActivity"
+    android:background="#FFFF99">
+
+    <TextView
+        android:id="@+id/act_login_textView"
+        android:textColor="#ff0000"
+        android:textSize="30dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="50dp"
+        android:text="Choose account"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textStyle="bold" />
+
+    <Spinner
+        android:id="@+id/act_login_spinner_account"
+        android:backgroundTint="@color/peach"
+        android:scrollbarSize="100dp"
+        android:layout_marginTop="50dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/act_login_textView" />
+
+    <ImageButton
+        android:id="@+id/act_login_send_btn"
+        android:layout_width="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_height="wrap_content"
+        android:src="@drawable/login_google"/>
+
+</RelativeLayout>

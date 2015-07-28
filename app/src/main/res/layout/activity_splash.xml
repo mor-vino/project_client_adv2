@@ -1,0 +1,48 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SplashActivity"
+    android:background="#FFFF99"
+    android:windowActionBar="false">
+    <TextView
+        android:id="@+id/act_splash_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:elegantTextHeight="true"
+        android:textColor="#990000"
+        android:layout_centerInParent="true"
+        android:layout_above="@+id/act_splash_progress_bar"
+        android:textSize="30dp"
+        android:layout_centerVertical="true"
+        />
+
+    <ProgressBar
+        style="@android:style/Widget.ProgressBar.Horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/act_splash_progress_bar"
+        android:layout_centerInParent="true"
+        android:progressDrawable="@drawable/progress_bar_bg"
+        android:maxWidth="320dp"
+        android:minHeight="320dp"
+        android:minWidth="320dp"/>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/act_splash_logo"
+        android:src="@drawable/cute_chat_logo"
+        android:layout_centerInParent="true"/>
+    <TextView
+        android:id="@+id/act_splash_chainging_text_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/act_splash_changing_text"
+        android:layout_below="@+id/act_splash_progress_bar"
+        android:layout_centerHorizontal="true"
+        android:textSize="50dp"
+        android:textColor="#990000"/>
+
+
+
+</RelativeLayout>
