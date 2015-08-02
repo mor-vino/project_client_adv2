@@ -44,6 +44,8 @@ import java.util.List;
  */
 public class ChannelListFragment extends Fragment {
     private List<ChannelItem> channels;
+    private ListView lstChannels;
+    private static final String APPID = OnTokenAcquired.APP_ID;
 
     public ChannelListFragment() {
         // Required empty public constructor
@@ -54,41 +56,11 @@ public class ChannelListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_channel_list, container, false);
-        ListView lstChannels = (ListView) view.findViewById(R.id.frag_channels_list_view_id);
+        lstChannels = (ListView) view.findViewById(R.id.frag_channels_list_view_id);
 
         List<ChannelItem> channelItemsList = new ArrayList<ChannelItem>();
-        channelItemsList = (List<ChannelItem>)(getArguments().get("channelsList"));
-        channelItemsList.add(new ChannelItem("5", R.mipmap.icon_channels_lg, new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), ChatActivity.class);
-                startActivity(intent);
-            }
-        }));
-        channelItemsList.add(new ChannelItem("6", R.mipmap.icon_channels_lg, new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), ChatActivity.class);
-                startActivity(intent);
-            }
-        }));
-        channelItemsList.add(new ChannelItem("1", R.mipmap.icon_channels_lg, new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), ChatActivity.class);
-                startActivity(intent);
-            }
-        }));
-        channelItemsList.add(new ChannelItem("10", R.mipmap.icon_channels_lg, new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), ChatActivity.class);
-                startActivity(intent);
-            }
-        }));
-
-        ChannelsListAdapter channelsListAdapter = new ChannelsListAdapter((FragmentActivity) getActivity(), channelItemsList);
-        lstChannels.setAdapter(channelsListAdapter);
+        //channelItemsList = (List<ChannelItem>)(getArguments().get("channelsList"));
+        new GetChannels().execute("http://" + APPID + ".appspot.com/getChannels");
         if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
             ListView lstMenu = (ListView) view.findViewById(R.id.frag_channels_list_view_id);
             lstMenu.setOnTouchListener(new OnSwipeTouchListener(getActivity()) {
@@ -114,13 +86,14 @@ public class ChannelListFragment extends Fragment {
         }
     }
     List<ChannelItem> getChannelsList() {
-        return channels;
+        return this.channels;
     }
-    /*
+
     private class GetChannels extends AsyncTask<String, String, String> {
         String text = null;
         String message = null , name , id , icon;
-        private List<ChannelItem> menuChannels = getChannelsList();
+        // check!!!!!!!  meyutar
+        private List<ChannelItem> menuChannels;
 
         protected String doInBackground(String... params) {
             try {
@@ -153,11 +126,16 @@ public class ChannelListFragment extends Fragment {
                     menuChannels.add(new ChannelItem(name, id, Integer.parseInt(icon), new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            String checkConnection = MapsActivity.sharedPref.getString(id, "-1");
+
+                            String ch = "-1";
+                            String minusOne = "-1";
                             //if the user hasn't connected to the channel, connect!
-                            if (checkConnection.equals("-1")) {
-                                new JoinChannel().execute("http://" + appId + ".appspot.com/joinChannel", id);
+                            if (ch.equals(minusOne)) {
+                                new JoinChannel().execute("http://" + APPID + ".appspot.com/joinChannel", id);
                             }
+
+                            //String checkConnection = MapsActivity.sharedPref.getString(id, "-1");
+
                             Intent intent = new Intent(getActivity(), ChatActivity.class);
                             intent.putExtra("id", id);
                             startActivity(intent);
@@ -169,7 +147,7 @@ public class ChannelListFragment extends Fragment {
             }
 
             ChannelsListAdapter friendsAdapter = new ChannelsListAdapter((FragmentActivity) getActivity(), menuChannels);
-            lstMenu.setAdapter(friendsAdapter);
+            lstChannels.setAdapter(friendsAdapter);
         }
     }
 
@@ -203,13 +181,13 @@ public class ChannelListFragment extends Fragment {
                 obj = new JSONObject(result);
                 int status = obj.getInt("status");
                 if (status == 1) {
-                    SharedPreferences.Editor editor = MapsActivity.sharedPref.edit();
+                    /*SharedPreferences.Editor editor = MapsActivity.sharedPref.edit();
                     JSONArray arr = new JSONArray();
                     JSONObject objArr = new JSONObject();
                     objArr.put("arrMessages", arr);
                     editor.putString(id, objArr.toString());
                     editor.commit();
-                    Toast.makeText(getActivity(), getString(R.string.connectChannel), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "connect Channel", Toast.LENGTH_SHORT).show();*/
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -230,5 +208,5 @@ public class ChannelListFragment extends Fragment {
         }
         return out.toString();
     }
-    */
+
 }

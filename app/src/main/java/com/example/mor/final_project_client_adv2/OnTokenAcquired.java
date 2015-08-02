@@ -48,4 +48,7 @@ public class OnTokenAcquired implements AccountManagerCallback<Bundle>  {
         Intent i = new Intent(activity, MapsActivity.class);
         activity.startActivity(i);
     }
+    public String getId() {
+        return this.APP_ID;
+    }
 }

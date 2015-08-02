@@ -13,6 +13,7 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.location.Location;
 import android.location.LocationListener;
+import android.os.AsyncTask;
 import android.os.Bundle;
 
 import android.os.Parcelable;
@@ -40,6 +41,17 @@ import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.protocol.BasicHttpContext;
+import org.apache.http.protocol.HttpContext;
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
@@ -68,6 +80,10 @@ public class MapsActivity extends FragmentActivity implements
     private static final long FASTEST_INTERVAL = 1000 * 5;
 
     private ArrayList<ChannelItem> channelItemsList;
+
+    private List<ChannelItem> menuMyChannels = new ArrayList<ChannelItem>();
+
+
 
 
     @Override
@@ -373,6 +389,83 @@ public class MapsActivity extends FragmentActivity implements
 
         public void onAccuracyChanged(Sensor sensor, int accuracy) {
         }
-    };
+/*
+        List<ChannelItem> getMyChannelsList() {
+            return menuMyChannels;
+        }
+        // the class responsible on getting the list of MY channels from server
+        private class GetMyChannels extends AsyncTask<String, String, String> {
+            String text = null;
+            String message = null , name , id , icon;
+            private List<ChannelItem> MyChannels = getMyChannelsList();
 
+            protected String doInBackground(String... params) {
+                try {
+                    HttpContext localContext = new BasicHttpContext();
+                    DefaultHttpClient httpClient = new DefaultHttpClient();
+
+                    HttpGet httpGet = new HttpGet(params[0]);
+
+                    HttpResponse response = httpClient.execute(httpGet, localContext);
+                    HttpEntity entity = response.getEntity();
+                    text = getASCIIContentFromEntity(entity);
+
+                } catch (Exception e) {}
+
+                return text;
+            }
+
+            protected void onPostExecute(String result) {
+                JSONObject obj = null;
+                try {
+                    obj = new JSONObject(result);
+                    JSONArray channels = obj.getJSONArray("channels");
+                    JSONObject data;
+                    for (int i = 0; i < channels.length(); i++) {
+                        data = channels.getJSONObject(i);
+                        String icon = data.getString("icon");
+                        String name = data.getString("name");
+                        final String id = data.getString("id");
+                        menuMyChannels.add(new ChannelItem(name, id, Integer.parseInt(icon), new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+
+                                String ch = "-1";
+                                String minusOne = "-1";
+                                //if the user hasn't connected to the channel, connect!
+                                if (ch.equals(minusOne)) {
+                                    new JoinChannel().execute("http://" + APPID + ".appspot.com/joinChannel", id);
+                                }
+
+                                //String checkConnection = MapsActivity.sharedPref.getString(id, "-1");
+
+                                Intent intent = new Intent(getActivity(), ChatActivity.class);
+                                intent.putExtra("id", id);
+                                startActivity(intent);
+                            }
+                        }));
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+                ChannelsListAdapter friendsAdapter = new ChannelsListAdapter((FragmentActivity) getActivity(), menuChannels);
+                lstChannels.setAdapter(friendsAdapter);
+            }
+        }
+
+        protected String getASCIIContentFromEntity(HttpEntity entity)
+                throws IllegalStateException, IOException {
+            InputStream in = entity.getContent();
+            StringBuffer out = new StringBuffer();
+            int n = 1;
+            while (n > 0) {
+                byte[] b = new byte[4096];
+                n = in.read(b);
+                if (n > 0)
+                    out.append(new String(b, 0, n));
+            }
+            return out.toString();
+        }*/
+    };
 }

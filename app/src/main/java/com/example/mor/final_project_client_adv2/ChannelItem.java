@@ -13,7 +13,7 @@ public class ChannelItem implements Serializable {
     private String title;
     View.OnClickListener listener;
 
-    public ChannelItem(String title, int icon, View.OnClickListener listener) {
+    public ChannelItem(String name, String title, int icon, View.OnClickListener listener) {
         this.icon = icon;
         this.listener = listener;
         this.title = title;
