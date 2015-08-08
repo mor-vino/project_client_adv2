@@ -1,6 +1,7 @@
 package com.example.mor.final_project_client_adv2;
 
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
@@ -30,7 +31,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 public class MenuFragment extends Fragment {
-    private static final String appId = OnTokenAcquired.APP_ID;
+    private  String appId;
 
     public MenuFragment() {
         // Required empty public constructor
@@ -86,6 +87,11 @@ public class MenuFragment extends Fragment {
                     startActivity(i);
                 }
             });
+        }
+        SharedPreferences sp = getActivity().getSharedPreferences("MyServer", Context.MODE_PRIVATE);
+        this.appId = sp.getString("serverName", "err");
+        if(this.appId.equals("err")) {
+            this.appId = "mpti-2048";
         }
 
         return view;

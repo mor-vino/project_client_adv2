@@ -1,5 +1,7 @@
 package com.example.mor.final_project_client_adv2;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.support.v7.app.ActionBar;
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,6 +16,7 @@ import java.util.List;
 public class SplashActivity extends ActionBarActivity {
     private int count;
     private int i;
+    ServerInfo si;
     public SplashActivity() {
         super();
         count = 0;
@@ -33,6 +36,12 @@ public class SplashActivity extends ActionBarActivity {
         textLst.add("Itay Parnafes");
         textLst.add("Mor Zohar");
         textLst.add("Paz Huber");
+        si = new ServerInfo("http://projectserver-984.appspot.com");
+        SharedPreferences sp = getSharedPreferences("MyServer", Context.MODE_PRIVATE);
+        SharedPreferences.Editor edit = sp.edit();
+        edit.putString("serverName", si.getServerName());
+        edit.putString("serverURL", si.getServerURL());
+        edit.commit();
         new Thread(new Runnable() {
             public void run() {
                 try {

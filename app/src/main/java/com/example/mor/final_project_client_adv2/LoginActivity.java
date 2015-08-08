@@ -2,6 +2,8 @@ package com.example.mor.final_project_client_adv2;
 
 import android.accounts.Account;
 import android.accounts.AccountManager;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -25,6 +27,7 @@ public class LoginActivity extends ActionBarActivity {
     Spinner spinner;
     DefaultHttpClient httpClient = new DefaultHttpClient();
     Account account;
+    ServerInfo si;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -7,20 +7,25 @@ import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
 import org.apache.http.impl.client.DefaultHttpClient;
 
 
 public class OnTokenAcquired implements AccountManagerCallback<Bundle>  {
     private static final int USER_PERMISSION = 989;
-    public static final String APP_ID = "projectserver-981";
+    public String APP_ID;
     private DefaultHttpClient httpclient;
     Activity activity;
 
     public OnTokenAcquired(DefaultHttpClient httpclient, Activity activity) {
         this.httpclient = httpclient;
         this.activity = activity;
+        SharedPreferences sharedPreferences = activity.getSharedPreferences("MyServer", Context.MODE_PRIVATE);
+        this.APP_ID = sharedPreferences.getString("serverName", "err");
+        if(this.APP_ID.equals("err")) {
+            this.APP_ID = "mpti-2048";
+        }
     }
     public void run(AccountManagerFuture<Bundle> result) {
 
@@ -44,7 +49,7 @@ public class OnTokenAcquired implements AccountManagerCallback<Bundle>  {
     protected void setAuthToken(Bundle bundle) {
         String authToken = bundle.getString(AccountManager.KEY_AUTHTOKEN);
 
-        new GetCookie(httpclient, APP_ID, activity.getBaseContext()).execute(authToken);
+        new GetCookie(httpclient, APP_ID, activity.getBaseContext(), activity).execute(authToken);
         Intent i = new Intent(activity, MapsActivity.class);
         activity.startActivity(i);
     }

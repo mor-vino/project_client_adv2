@@ -1,6 +1,8 @@
 package com.example.mor.final_project_client_adv2;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 
 import org.apache.http.HttpResponse;
@@ -16,16 +18,20 @@ public class GetCookie extends AsyncTask<String, Void, Boolean> {
     String appId;
     HttpParams params;
     private HttpResponse response;
-    private static final String LINK_TO_GET_AUTHENTICATED = "http://projectserver-981.appspot.com/login";
+    private String LINK_TO_GET_AUTHENTICATED;
     Context context;
     private DefaultHttpClient httpclient;
 
-    public GetCookie(DefaultHttpClient httpclient, String appId, Context context)
-    {
+    public GetCookie(DefaultHttpClient httpclient, String appId, Context context, Activity act) {
         this.httpclient = httpclient;
         params = httpclient.getParams();
         this.appId = appId;
         this.context = context;
+        SharedPreferences sharedPreferences = act.getSharedPreferences("MyServer", Context.MODE_PRIVATE);
+        this.LINK_TO_GET_AUTHENTICATED = sharedPreferences.getString("serverURL", "err");
+        if(this.LINK_TO_GET_AUTHENTICATED.equals("err")) {
+            this.LINK_TO_GET_AUTHENTICATED = "mpti-2048";
+        }
     }
 
     protected Boolean doInBackground(String... tokens) {

@@ -6,6 +6,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
@@ -68,6 +69,9 @@ public class MapsActivity extends FragmentActivity implements
     private static final long FASTEST_INTERVAL = 1000 * 5;
 
     private ArrayList<ChannelItem> channelItemsList;
+
+    private ServerInfo si;
+
 
 
     @Override
