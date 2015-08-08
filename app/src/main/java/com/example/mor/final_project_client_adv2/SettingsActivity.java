@@ -14,7 +14,6 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.List;
 
 
 public class SettingsActivity extends ActionBarActivity {
@@ -23,7 +22,6 @@ public class SettingsActivity extends ActionBarActivity {
     private Spinner fgUpdateSpinner;
     private String selectedServer;
     private ArrayList<String> serversList;
-    private String serverUrl;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

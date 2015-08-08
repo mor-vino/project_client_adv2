@@ -1,5 +1,6 @@
 package com.example.mor.final_project_client_adv2;
 
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -42,7 +43,8 @@ public class JoinChannelActivity extends ActionBarActivity {
                 onBackPressed();
             }
         });*/
-        new GetMyChannels(this).execute("http://" + OnTokenAcquired.APP_ID + ".appspot.com/getMyChannels");
+        SharedPreferences sp = getSharedPreferences("MyServer", MODE_PRIVATE);
+        new GetMyChannels(this).execute("http://" + sp.getString("serverName", "mpti-2048") + ".appspot.com/getMyChannels");
         //new GetChannels().execute("http://" + OnTokenAcquired.APP_ID + ".appspot.com/getChannels");
     }
 

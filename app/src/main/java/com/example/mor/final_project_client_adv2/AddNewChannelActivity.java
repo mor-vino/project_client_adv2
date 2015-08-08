@@ -46,7 +46,8 @@ public class AddNewChannelActivity extends ActionBarActivity {
                 onBackPressed();
             }
         });*/
-        new GetMyChannels(this).execute("http://" + OnTokenAcquired.APP_ID + ".appspot.com/getMyChannels");
+        SharedPreferences sp = getSharedPreferences("MyServer", MODE_PRIVATE);
+        new GetMyChannels(this).execute("http://" + sp.getString("serverName", "mpti-2048") + ".appspot.com/getMyChannels");
         //new com.example.mor.final_project_client_adv2.GetChannels().execute("http://" + OnTokenAcquired.APP_ID + ".appspot.com/getChannels");
     }
 

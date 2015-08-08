@@ -158,8 +158,8 @@ public class MapsActivity extends FragmentActivity implements
             ft.add(R.id.act_maps_land_channels_list, chanelsListFragment);
             ft.addToBackStack(null);
             ft.commit();
-
-            new GetMyChannels(this).execute("http://" + OnTokenAcquired.APP_ID + ".appspot.com/getMyChannels");
+            SharedPreferences sp = getSharedPreferences("MyServer", MODE_PRIVATE);
+            new GetMyChannels(this).execute("http://" + sp.getString("serverName", "mpti-2048") + ".appspot.com/getMyChannels");
         }
 
     }
