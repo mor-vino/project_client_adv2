@@ -54,7 +54,6 @@ public class MenuFragment extends Fragment {
                 public void onClick(View v) {
                     FragmentManager fm = getFragmentManager();
                     FragmentTransaction ft = fm.beginTransaction();
-                    // TODO -- BUG >  ChannelListFragment
                     ft.add(R.id.act_maps_channel_list_layout_portrait_id, new ChannelListFragment());
                     ft.addToBackStack(null);
                     ft.commit();
@@ -70,7 +69,7 @@ public class MenuFragment extends Fragment {
                     startActivity(i);
                 }
             });
-
+            // this button is to logOut
             Button logOutBtn = (Button) view.findViewById(R.id.frag_menu_logout_btn);
             logOutBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -78,7 +77,7 @@ public class MenuFragment extends Fragment {
                     new Logoff().execute("http://" + appId + ".appspot.com/logoff");
                 }
             });
-
+            // this button is to enter the settings activity
             Button settingsBtn = (Button) view.findViewById(R.id.frag_menu_settings_btnId);
             settingsBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -92,7 +91,9 @@ public class MenuFragment extends Fragment {
             updatesBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    // create an object of the updates class
                     GetUpdatesFromServer upd = new GetUpdatesFromServer(getActivity(), appId);
+                    // syncronize all updates with the current server
                     upd.syncAllUpdates();
                 }
             });

@@ -1,24 +1,80 @@
 package com.example.mor.final_project_client_adv2;
 
+import android.accounts.Account;
+import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.Spinner;
+import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.Map;
+
 
 public class JoinChannelActivity extends ActionBarActivity {
 
+    private String DEFAULT = "-1";
+    private Spinner spinner;
+    private ArrayList<String> channelsList;
+    private String id;
+    private String name;
+    private String icon;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_join_channel);
-        /*Button b = (Button) findViewById(R.id.act_join_chan_btn);
-        b.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onBackPressed();
-            }
-        });*/
+
+        // put the channels fragment in this screen in a specific layout
+        spinner = (Spinner) findViewById(R.id.act_join_chan_spinner_account);
+        channelsList = new ArrayList<String>();
+
+        SharedPreferences allChannels_IdName_SP =  getSharedPreferences("AllChannels_IdName_SP", Context.MODE_PRIVATE);
+        Map<String,?> keys = allChannels_IdName_SP.getAll();
+        for(Map.Entry<String,?> entry : keys.entrySet()){
+            String id =  entry.getKey();
+            channelsList.add(id);
+        }
+        if(channelsList.size()==0) {
+            Toast t = Toast.makeText(getApplicationContext(), "no channels to show", Toast.LENGTH_LONG);
+            t.show();
+        } else {
+            ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, channelsList);
+            dataAdapter.setDropDownViewResource(R.layout.spinner_item);
+            spinner.setAdapter(dataAdapter);
+            Button join = (Button) findViewById(R.id.act_join_chan_btn);
+            join.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int i = spinner.getSelectedItemPosition();
+                    id = channelsList.get(i);
+                    SharedPreferences myChannels_IdName_SP =  getSharedPreferences("MyChannels_IdName_SP", Context.MODE_PRIVATE);
+                    // if the return value is not the DEFAULT, it means that it already joined that channel
+                    if (!(name = myChannels_IdName_SP.getString(id, DEFAULT)).equals(DEFAULT)){
+                        Toast t = Toast.makeText(getApplicationContext(), "you are already connected to this channel",
+                                Toast.LENGTH_LONG);
+                        t.show();
+                    } else {
+                        // ask the server to join to this channel
+                        SharedPreferences sp = getSharedPreferences("MyServer", Context.MODE_PRIVATE);
+                        String appId = sp.getString("serverName", "err");
+                        if(appId.equals("err")) {
+                            appId = "mpti-2048";
+                        }
+                        new JoinChannel(JoinChannelActivity.this).execute("http://" + appId + ".appspot.com/joinChannel", id);
+                    }
+                }
+            });
+        }
     }
 
     @Override

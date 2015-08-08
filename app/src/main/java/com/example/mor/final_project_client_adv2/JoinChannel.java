@@ -1,5 +1,6 @@
 package com.example.mor.final_project_client_adv2;
 
+import android.app.Activity;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.widget.Toast;
@@ -26,6 +27,11 @@ import java.util.ArrayList;
 public class JoinChannel extends AsyncTask<String, String, String> {
     String text = null;
     String id;
+    private Activity myActivity;
+
+    public JoinChannel(Activity act){
+        this.myActivity = act;
+    }
 
     protected String doInBackground(String... params) {
         try {
@@ -52,18 +58,16 @@ public class JoinChannel extends AsyncTask<String, String, String> {
         try {
             obj = new JSONObject(result);
             int status = obj.getInt("status");
-            if (status == 1) {/*
-                SharedPreferences.Editor editor = getSharedPreferences("",).edit();
-                JSONArray arr = new JSONArray();
-                JSONObject objArr = new JSONObject();
-                objArr.put("arrMessages", arr);
-                editor.putString(id, objArr.toString());
-                editor.commit();*/
+            if (status == 1) {
+                Toast t = Toast.makeText(this.myActivity.getApplicationContext(),
+                        "welcome to channel:" + id + ", you joined successfully", Toast.LENGTH_SHORT);
+                t.show();
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
     protected String getASCIIContentFromEntity(HttpEntity entity)
             throws IllegalStateException, IOException {
         InputStream in = entity.getContent();
@@ -77,5 +81,4 @@ public class JoinChannel extends AsyncTask<String, String, String> {
         }
         return out.toString();
     }
-
 }

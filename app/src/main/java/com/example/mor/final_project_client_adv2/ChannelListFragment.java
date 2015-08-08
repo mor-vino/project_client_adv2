@@ -32,7 +32,7 @@ public class ChannelListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_channel_list, container, false);
-        ListView lstChannels = (ListView) view.findViewById(R.id.frag_all_channels_list_view_id);
+        ListView lstChannels = (ListView) view.findViewById(R.id.frag_channels_list_view_id);
         List<ChannelItem> channelItemsList = new ArrayList<ChannelItem>();
         // TODO
         SharedPreferences myChannels_IdName_SP =  getActivity().getSharedPreferences("MyChannels_IdName_SP", Context.MODE_PRIVATE);
@@ -50,7 +50,7 @@ public class ChannelListFragment extends Fragment {
                 }
             }));
         }
-        channelItemsList.add(new ChannelItem("1","shira","M",new View.OnClickListener() {
+        channelItemsList.add(new ChannelItem("1048","shira","M",new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), ChatActivity.class);
