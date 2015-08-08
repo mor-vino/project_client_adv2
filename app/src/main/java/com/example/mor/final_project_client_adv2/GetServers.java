@@ -49,7 +49,7 @@ public class GetServers extends AsyncTask<String, String, String> {
         JSONObject obj = null;
         try {
             obj = new JSONObject(result);
-            JSONArray servers = obj.getJSONArray("servers");
+            JSONArray servers = obj.getJSONArray("server");
             for (int i = 0; i < servers.length(); i++) {
                 serversList.add(servers.getString(i));
             }
