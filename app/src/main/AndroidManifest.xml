@@ -71,6 +71,14 @@
             android:name=".SettingsActivity"
             android:label="@string/title_activity_settings" >
         </activity>
+        <activity
+            android:name=".JoinChannelActivity"
+            android:label="@string/title_activity_join_channel" >
+        </activity>
+        <activity
+            android:name=".ChannelsOptions"
+            android:label="@string/title_activity_channels_options" >
+        </activity>
     </application>
 
 </manifest>

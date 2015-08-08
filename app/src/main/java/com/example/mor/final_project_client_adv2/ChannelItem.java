@@ -9,22 +9,28 @@ import java.io.Serializable;
 
 
 public class ChannelItem implements Serializable {
-    private int icon;
-    private String title;
+    private String id;
+    private String name;
+    private String icon;
     View.OnClickListener listener;
 
-    public ChannelItem(String name, String title, int icon, View.OnClickListener listener) {
-        this.icon = icon;
+    public ChannelItem(String id, String name,String icon, View.OnClickListener listener) {
         this.listener = listener;
-        this.title = title;
+        this.id = id;
+        this.name = name;
+        this.icon = icon;
     }
 
-    public int getIcon() {
+    public String getIcon() {
         return icon;
     }
 
-    public String getTitle() {
-        return title;
+    public String getName(){
+        return name;
+    }
+
+    public String getID() {
+        return id;
     }
 
     public View.OnClickListener getListener() {

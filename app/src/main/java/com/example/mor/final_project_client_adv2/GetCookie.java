@@ -16,7 +16,7 @@ public class GetCookie extends AsyncTask<String, Void, Boolean> {
     String appId;
     HttpParams params;
     private HttpResponse response;
-    private static final String LINK_TO_GET_AUTHENTICATED = "http://projectserver-981.appspot.com/login";
+    private static final String LINK_TO_GET_AUTHENTICATED = "http://projectserver-984.appspot.com/login";
     Context context;
     private DefaultHttpClient httpclient;
 

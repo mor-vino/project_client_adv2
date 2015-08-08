@@ -10,118 +10,67 @@
 <RelativeLayout
     android:id="@+id/settingButtns"
     android:layout_width="wrap_content"
-    android:layout_height="100dp"
+    android:layout_height="200dp"
     android:layout_alignParentRight="true"
     android:layout_alignParentEnd="true"
     android:layout_alignParentLeft="true"
     android:layout_alignParentStart="true"
-    android:layout_gravity="bottom"
-    android:background="#ccFFFF99"
-    android:layout_weight="12.80">
+    android:layout_gravity="bottom">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:orientation="vertical"
         >
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:id="@+id/frag_menu_left_up_layout">
 
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+        <Button
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:text="channels list"
                 android:id="@+id/frag_menu_chan_list_btnId"
-                android:layout_alignParentTop="true"
-                android:layout_marginTop="7dp"
-                android:layout_marginLeft="7dp"
-                android:layout_marginRight="7dp"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true"
-                android:background="#aaFFCC99"
-                android:textColor="#FF0000"/>
+                android:background="@color/peach"
+                android:textColor="@color/red"
+                android:layout_weight="1"/>
 
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="add channel"
-                android:id="@+id/frag_menu_add_channel_btnId"
-                android:layout_below="@+id/frag_menu_chan_list_btnId"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentRight="true"
-                android:layout_marginLeft="7dp"
-                android:layout_marginTop="7dp"
-                android:layout_marginBottom="7dp"
-                android:layout_marginRight="7dp"
-                android:background="#aaFFCC99"
-                android:textColor="#FF0000"/>
+        <Button
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="channels options"
+                android:id="@+id/frag_menu_chans_opt_btnId"
+                android:background="@color/peachLight"
+                android:textColor="@color/red"
+                android:layout_weight="1"/>
 
-
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1">
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+        <Button
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:text="settings"
                 android:id="@+id/frag_menu_settings_btnId"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginLeft="7dp"
-                android:layout_marginTop="7dp"
-                android:layout_marginRight="7dp"
-                android:background="#aaFFCC99"
-                android:textColor="#FF0000"/>
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="remove channel"
-                android:id="@+id/frag_menu_rmv_channel_btnId"
-                android:layout_below="@+id/frag_menu_settings_btnId"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginLeft="7dp"
-                android:layout_marginTop="7dp"
-                android:layout_marginBottom="7dp"
-                android:layout_marginRight="7dp"
-                android:background="#aaFFCC99"
-                android:textColor="#FF0000"/>
-        </RelativeLayout>
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            >
-            <Button
+                android:background="@color/peach"
+                android:textColor="@color/red"
+                android:layout_weight="1"/>
+
+        <Button
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="update info"
+                android:id="@+id/frag_menu_updates_btnId"
+                android:background="@color/peachLight"
+                android:textColor="@color/red"
+            android:layout_weight="1"/>
+
+        <Button
                 android:id="@+id/frag_menu_logout_btn"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="Log Out"
-                android:layout_centerInParent="true"
-                android:background="#aaFFCC99"
-                android:textColor="#FF0000"
-                android:layout_marginLeft="7dp"
-                android:layout_marginTop="7dp"
-                android:layout_marginRight="7dp"
-                android:layout_marginBottom="7dp">
+                android:background="@color/peach"
+                android:textColor="@color/red"
+            android:layout_weight="1">
         </Button>
 
-        </RelativeLayout>
-
     </LinearLayout>
+
 </RelativeLayout>
+
 </LinearLayout>

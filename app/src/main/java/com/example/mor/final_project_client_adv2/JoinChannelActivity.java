@@ -1,9 +1,6 @@
 package com.example.mor.final_project_client_adv2;
 
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.AsyncTask;
-import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -11,7 +8,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.Spinner;
 
 import org.apache.http.HttpEntity;
@@ -33,13 +29,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class AddNewChannelActivity extends ActionBarActivity {
+public class JoinChannelActivity extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_new_channel);
-        /*Button b = (Button) findViewById(R.id.act_add_btn_id);
+        setContentView(R.layout.activity_join_channel);
+        /*Button b = (Button) findViewById(R.id.act_join_chan_btn);
         b.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -47,13 +43,13 @@ public class AddNewChannelActivity extends ActionBarActivity {
             }
         });*/
         new GetMyChannels(this).execute("http://" + OnTokenAcquired.APP_ID + ".appspot.com/getMyChannels");
-        //new com.example.mor.final_project_client_adv2.GetChannels().execute("http://" + OnTokenAcquired.APP_ID + ".appspot.com/getChannels");
+        //new GetChannels().execute("http://" + OnTokenAcquired.APP_ID + ".appspot.com/getChannels");
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_add_new_channel, menu);
+        getMenuInflater().inflate(R.menu.menu_join_channel, menu);
         return true;
     }
 
@@ -71,9 +67,9 @@ public class AddNewChannelActivity extends ActionBarActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
 /*
-    //  joining to new chanenl
-    private class com.example.mor.final_project_client_adv2.GetChannels extends AsyncTask<String, String, String> {
+    private class GetChannels extends AsyncTask<String, String, String> {
         String text = null;
         String message = null , name , id , icon;
         private List<String> allChannels;
@@ -97,7 +93,7 @@ public class AddNewChannelActivity extends ActionBarActivity {
 
         protected void onPostExecute(String result) {
             allChannels = new ArrayList<String>();
-            Spinner chnls = (Spinner) findViewById(R.id.act_add_new_chann_spinner_account);
+            Spinner chnls = (Spinner) findViewById(R.id.act_join_chan_spinner_account);
             JSONObject obj = null;
             try {
                 obj = new JSONObject(result);
@@ -109,10 +105,11 @@ public class AddNewChannelActivity extends ActionBarActivity {
                     String name = data.getString("name");
                     final String id = data.getString("id");
                     allChannels.add(id);
-                    ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(AddNewChannelActivity.this, android.R.layout.simple_spinner_item, allChannels);
+                    ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(AddNewChannelActivity.this,
+                            android.R.layout.simple_spinner_item, allChannels);
                     dataAdapter.setDropDownViewResource(R.layout.spinner_item);
                     chnls.setAdapter(dataAdapter);
-                    Button addChannelBtn = (Button) findViewById(R.id.act_add_new_chann_btn);
+                    Button addChannelBtn = (Button) findViewById(R.id.act_join_chan_btn);
                     addChannelBtn.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
@@ -190,5 +187,5 @@ public class AddNewChannelActivity extends ActionBarActivity {
         }
         return out.toString();
     }
-        */
+*/
 }
