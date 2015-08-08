@@ -33,6 +33,16 @@ public class ChannelsOptions extends ActionBarActivity {
                 startActivity(i);
             }
         });
+
+        // define the removing channel button
+        Button joinChannelBtn = (Button) findViewById(R.id.act_chans_opt_join_chan);
+        joinChannelBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(ChannelsOptions.this, JoinChannelActivity.class);
+                startActivity(i);
+            }
+        });
     }
 
     @Override

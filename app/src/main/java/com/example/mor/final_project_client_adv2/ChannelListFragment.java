@@ -1,20 +1,15 @@
 package com.example.mor.final_project_client_adv2;
 
 
-import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,7 +17,6 @@ import android.widget.ListView;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-
 
 /**
  * A simple {@link Fragment} subclass.
@@ -56,7 +50,7 @@ public class ChannelListFragment extends Fragment {
                 }
             }));
         }
-        channelItemsList.add(new ChannelItem("1","shira","M",new View.OnClickListener() {
+        channelItemsList.add(new ChannelItem("1048","shira","M",new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), ChatActivity.class);
