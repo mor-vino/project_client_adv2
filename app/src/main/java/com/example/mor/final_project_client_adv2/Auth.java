@@ -30,7 +30,7 @@ public class Auth extends AsyncTask<String, Void, Boolean> {
 
         try {
 
-            HttpGet httpGet = new HttpGet(urls[0]);
+            HttpGet httpGet = new HttpGet(urls[0] + "/login");
             response = httpclient.execute(httpGet);
             StatusLine statusLine = response.getStatusLine();
             if(statusLine.getStatusCode() == HttpStatus.SC_OK){

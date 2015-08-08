@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
+import android.widget.Toast;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -16,6 +17,7 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.List;
 
 /**
  * Created by mor on 03/08/2015.
@@ -23,11 +25,15 @@ import java.io.InputStream;
 public class GetMyChannels extends AsyncTask<String, String, String> {
     String text = null;
     String message = null , name , id , icon;
-    public SharedPreferences myChannelsSP;
+    public SharedPreferences myChannels_IdName_SP;
+    public SharedPreferences myChannels_IdIcon_SP;
+    Activity myActivity;
 
     // input: the current activity
     public GetMyChannels(Activity act) {
-        myChannelsSP =  act.getSharedPreferences("MyChannelsSP", Context.MODE_PRIVATE);
+        myActivity = act;
+        myChannels_IdName_SP =  act.getSharedPreferences("MyChannels_IdName_SP", Context.MODE_PRIVATE);
+        myChannels_IdIcon_SP =  act.getSharedPreferences("MyChannels_IdIcon_SP", Context.MODE_PRIVATE);
     }
     protected String doInBackground(String... params) {
         try {
@@ -56,9 +62,16 @@ public class GetMyChannels extends AsyncTask<String, String, String> {
                 String icon = data.getString("icon");
                 String name = data.getString("name");
                 final String id = data.getString("id");
-                SharedPreferences.Editor editor = myChannelsSP.edit();
-                editor.putString(id, name);
+                SharedPreferences.Editor editor1 = myChannels_IdName_SP.edit();
+                SharedPreferences.Editor editor2 = myChannels_IdIcon_SP.edit();
+                editor1.putString(id, name);
+                editor2.putString(id, icon);
+                editor1.commit();
+                editor2.commit();
             }
+            Toast toast = Toast.makeText( myActivity.getApplicationContext(),
+                    "FINISHED ENTER MY CHANNELS TO SP!",  Toast.LENGTH_SHORT);
+            toast.show();
         } catch (Exception e) {
             e.printStackTrace();
         }
