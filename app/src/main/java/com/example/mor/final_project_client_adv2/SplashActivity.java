@@ -1,7 +1,9 @@
 package com.example.mor.final_project_client_adv2;
 
+import android.app.Service;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.os.IBinder;
 import android.support.v7.app.ActionBar;
 import android.content.Intent;
 import android.os.Bundle;
@@ -39,9 +41,14 @@ public class SplashActivity extends ActionBarActivity {
         si = new ServerInfo("http://projectserver-984.appspot.com");
         SharedPreferences sp = getSharedPreferences("MyServer", Context.MODE_PRIVATE);
         SharedPreferences.Editor edit = sp.edit();
+        SharedPreferences spUpdate = getSharedPreferences("updates", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editUpdates = spUpdate.edit();
         edit.putString("serverName", si.getServerName());
         edit.putString("serverURL", si.getServerURL());
+        editUpdates.putInt("bg", 5);
+        editUpdates.putInt("fg", 10);
         edit.commit();
+        editUpdates.commit();
         new Thread(new Runnable() {
             public void run() {
                 try {

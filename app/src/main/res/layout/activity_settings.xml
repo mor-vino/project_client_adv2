@@ -18,7 +18,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Background app update rate
-             (in seconds):"
+             (in minutes) default value-5 min :"
             android:layout_centerVertical="true"
             android:textColor="@color/red"
             android:textSize="15dp"/>
@@ -51,7 +51,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Foreground app update rate
-             (in minutes):"
+             (in seconds) default value-10 sec:"
             android:layout_centerVertical="true"
             android:textColor="@color/red"
             android:textSize="15dp"/>
