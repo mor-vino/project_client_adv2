@@ -23,16 +23,27 @@ import java.util.ArrayList;
 
 /**
  * Created by mor on 07/08/2015.
+ * class to add new channel
  */
 public class JoinChannel extends AsyncTask<String, String, String> {
+    //members
     String text = null;
     String id;
     private Activity myActivity;
 
+    /**
+     * constructor
+     * @param act current activity
+     */
     public JoinChannel(Activity act){
         this.myActivity = act;
     }
 
+    /**
+     * connect the server in buckground
+     * @param params to the server
+     * @return the result
+     */
     protected String doInBackground(String... params) {
         try {
             HttpContext localContext = new BasicHttpContext();
@@ -53,6 +64,10 @@ public class JoinChannel extends AsyncTask<String, String, String> {
         return text;
     }
 
+    /**
+     * send post request
+     * @param result
+     */
     protected void onPostExecute(String result) {
         JSONObject obj = null;
         try {
@@ -72,6 +87,13 @@ public class JoinChannel extends AsyncTask<String, String, String> {
         }
     }
 
+    /**
+     * make get request
+     * @param entity url
+     * @return the result
+     * @throws IllegalStateException
+     * @throws IOException
+     */
     protected String getASCIIContentFromEntity(HttpEntity entity)
             throws IllegalStateException, IOException {
         InputStream in = entity.getContent();

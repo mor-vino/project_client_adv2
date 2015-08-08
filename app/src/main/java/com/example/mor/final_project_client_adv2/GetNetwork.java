@@ -26,6 +26,7 @@ import java.util.Set;
  * Created by paz on 08/08/2015.
  */
 public class GetNetwork extends AsyncTask<String, String, String> {
+    //members
     String text = null;
     String message = null , name , id , icon;
     Set<String> members = new HashSet<String>();
@@ -33,11 +34,20 @@ public class GetNetwork extends AsyncTask<String, String, String> {
     public SharedPreferences allChannelsAndMembers_IdNames_SP;
     Activity myActivity;
 
-    // input: the current activity
+    /**
+     * constructor
+     * @param act the current activity
+     */
     public GetNetwork(Activity act) {
         myActivity = act;
         allChannelsAndMembers_IdNames_SP = act.getSharedPreferences("AllChannelsAndMembers_IdNames_SP", Context.MODE_PRIVATE);
     }
+
+    /**
+     * connection in the buckground
+     * @param params for the comunication
+     * @return the message
+     */
     protected String doInBackground(String... params) {
         try {
             HttpContext localContext = new BasicHttpContext();
@@ -54,6 +64,10 @@ public class GetNetwork extends AsyncTask<String, String, String> {
         return text;
     }
 
+    /**
+     * make post request for the server
+     * @param result kye value
+     */
     protected void onPostExecute(String result) {
         JSONObject obj = null;
         try {
@@ -81,7 +95,13 @@ public class GetNetwork extends AsyncTask<String, String, String> {
         }
     }
 
-
+    /**
+     * make get request for the server
+     * @param entity url
+     * @return the result
+     * @throws IllegalStateException
+     * @throws IOException
+     */
     protected String getASCIIContentFromEntity(HttpEntity entity)
             throws IllegalStateException, IOException {
         InputStream in = entity.getContent();

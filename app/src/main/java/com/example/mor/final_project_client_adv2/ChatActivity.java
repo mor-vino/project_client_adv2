@@ -13,13 +13,14 @@ import android.widget.ListView;
 import java.util.ArrayList;
 import java.util.List;
 
-
+/**
+ * class to make the chat
+ */
 public class ChatActivity extends ActionBarActivity {
+    //members
     Button sendButton;
     List<ChatItem> chatItems = new ArrayList<ChatItem>();
-
     EditText textBox;
-
     ListView mChatList;
     ChatAdapter mChatAdapter;
     @Override

@@ -12,7 +12,10 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 import java.io.ByteArrayOutputStream;
 
-
+/**
+ * class to connect andauthentication
+ * on the server
+ */
 public class Auth extends AsyncTask<String, Void, Boolean> {
 
     private DefaultHttpClient httpclient;
@@ -20,14 +23,24 @@ public class Auth extends AsyncTask<String, Void, Boolean> {
     private String content =  null;
     Context context;
 
+    /**
+     * constructor
+     * @param httpclient link to the server
+     * @param context to the server
+     */
     public Auth(DefaultHttpClient httpclient, Context context)
     {
         this.httpclient = httpclient;
         this.context = context;
     }
 
+    /**
+     * func to connect the server in the buckground
+     * @param urls of the server
+     * @return the status of the connection
+     */
     protected Boolean doInBackground(String... urls) {
-
+        //try connect
         try {
 
             HttpGet httpGet = new HttpGet(urls[0] + "/login");
