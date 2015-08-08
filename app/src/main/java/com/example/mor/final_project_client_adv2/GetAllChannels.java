@@ -25,14 +25,15 @@ public class GetAllChannels extends AsyncTask<String, String, String> {
     String text = null;
     String message = null , name , id , icon;
     public SharedPreferences sharedPref;
-    public SharedPreferences allChannelsSP;
+    public SharedPreferences allChannels_IdName_SP;
+    public SharedPreferences allChannels_IdIcon_SP;
     Activity myActivity;
 
     // input: the current activity
     public GetAllChannels(Activity act) {
         myActivity = act;
-        allChannelsSP =  act.getSharedPreferences("AllChannelsSP", Context.MODE_PRIVATE);
-    }
+        allChannels_IdName_SP =  act.getSharedPreferences("AllChannels_IdName_SP", Context.MODE_PRIVATE);
+        allChannels_IdIcon_SP =  act.getSharedPreferences("AllChannels_IdIcon_SP", Context.MODE_PRIVATE);    }
     protected String doInBackground(String... params) {
         try {
             HttpContext localContext = new BasicHttpContext();
@@ -60,8 +61,12 @@ public class GetAllChannels extends AsyncTask<String, String, String> {
                 String icon = data.getString("icon");
                 String name = data.getString("name");
                 final String id = data.getString("id");
-                SharedPreferences.Editor editor = allChannelsSP.edit();
-                editor.putString(id, name);
+                SharedPreferences.Editor editor1 = allChannels_IdName_SP.edit();
+                SharedPreferences.Editor editor2 = allChannels_IdIcon_SP.edit();
+                editor1.putString(id, name);
+                editor2.putString(id, icon);
+                editor1.commit();
+                editor2.commit();
             }
             Toast toast = Toast.makeText( myActivity.getApplicationContext(),
                     "finished enter ALL channels to SP!",  Toast.LENGTH_SHORT);

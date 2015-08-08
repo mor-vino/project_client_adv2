@@ -1,34 +1,10 @@
 package com.example.mor.final_project_client_adv2;
 
 import android.content.SharedPreferences;
-import android.os.AsyncTask;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.Spinner;
-
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.NameValuePair;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.message.BasicNameValuePair;
-import org.apache.http.protocol.BasicHttpContext;
-import org.apache.http.protocol.HttpContext;
-import org.json.JSONArray;
-import org.json.JSONObject;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.List;
-
 
 public class JoinChannelActivity extends ActionBarActivity {
 
@@ -43,9 +19,6 @@ public class JoinChannelActivity extends ActionBarActivity {
                 onBackPressed();
             }
         });*/
-        SharedPreferences sp = getSharedPreferences("MyServer", MODE_PRIVATE);
-        new GetMyChannels(this).execute("http://" + sp.getString("serverName", "mpti-2048") + ".appspot.com/getMyChannels");
-        //new GetChannels().execute("http://" + OnTokenAcquired.APP_ID + ".appspot.com/getChannels");
     }
 
     @Override

@@ -1,6 +1,5 @@
 package com.example.mor.final_project_client_adv2;
 
-
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -18,25 +17,23 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-/**
- * A simple {@link Fragment} subclass.
- */
-public class ChannelListFragment extends Fragment {
+
+public class AllChannelsListFragment extends Fragment {
     private ListView lstChannels;
 
-    public ChannelListFragment() {
+    public AllChannelsListFragment() {
         // Required empty public constructor
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_channel_list, container, false);
-        ListView lstChannels = (ListView) view.findViewById(R.id.frag_all_channels_list_view_id);
+        View view = inflater.inflate(R.layout.fragment_all_channels_list, container, false);
+        ListView lstChannels = (ListView) view.findViewById(R.id.frag_channels_list_view_id);
         List<ChannelItem> channelItemsList = new ArrayList<ChannelItem>();
         // TODO
-        SharedPreferences myChannels_IdName_SP =  getActivity().getSharedPreferences("MyChannels_IdName_SP", Context.MODE_PRIVATE);
-        SharedPreferences myChannels_IdIcon_SP =  getActivity().getSharedPreferences("MyChannels_IdIcon_SP", Context.MODE_PRIVATE);
+        SharedPreferences myChannels_IdName_SP =  getActivity().getSharedPreferences("AllChannels_IdName_SP", Context.MODE_PRIVATE);
+        SharedPreferences myChannels_IdIcon_SP =  getActivity().getSharedPreferences("AllChannels_IdIcon_SP", Context.MODE_PRIVATE);
         Map<String,?> keys = myChannels_IdName_SP.getAll();
         for(Map.Entry<String,?> entry : keys.entrySet()){
             String id =  entry.getKey();
@@ -75,6 +72,7 @@ public class ChannelListFragment extends Fragment {
         }
         return view;
     }
+
     private void setFragment() {
         if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
             FragmentManager fm1 = getFragmentManager();
@@ -83,4 +81,5 @@ public class ChannelListFragment extends Fragment {
             ft1.commit();
         }
     }
+
 }
