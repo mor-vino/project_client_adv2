@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
+import android.widget.Toast;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -25,9 +26,11 @@ public class GetAllChannels extends AsyncTask<String, String, String> {
     String message = null , name , id , icon;
     public SharedPreferences sharedPref;
     public SharedPreferences allChannelsSP;
+    Activity myActivity;
 
     // input: the current activity
     public GetAllChannels(Activity act) {
+        myActivity = act;
         allChannelsSP =  act.getSharedPreferences("AllChannelsSP", Context.MODE_PRIVATE);
     }
     protected String doInBackground(String... params) {
@@ -60,6 +63,9 @@ public class GetAllChannels extends AsyncTask<String, String, String> {
                 SharedPreferences.Editor editor = allChannelsSP.edit();
                 editor.putString(id, name);
             }
+            Toast toast = Toast.makeText( myActivity.getApplicationContext(),
+                    "finished enter ALL channels to SP!",  Toast.LENGTH_SHORT);
+            toast.show();
         } catch (Exception e) {
             e.printStackTrace();
         }

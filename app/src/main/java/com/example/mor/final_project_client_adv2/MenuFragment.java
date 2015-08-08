@@ -87,9 +87,8 @@ public class MenuFragment extends Fragment {
             updatesBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    // TODO --- change to function that update from server
-                    Intent i = new Intent(getActivity(), SettingsActivity.class);
-                    startActivity(i);
+                    // TODO -- that update from server
+                    getUpdatesFromServer();
                 }
             });
         }
@@ -158,4 +157,8 @@ public class MenuFragment extends Fragment {
         return out.toString();
     }
 
+    private void getUpdatesFromServer(){
+        new GetMyChannels(getActivity()).execute("http://" + appId + ".appspot.com/getMyChannels");
+        new GetAllChannels(getActivity()).execute("http://" + appId + ".appspot.com/getChannels");
+    }
 }
