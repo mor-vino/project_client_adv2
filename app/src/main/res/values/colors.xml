@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="peach">#FFCC99</color>
+    <color name="peachLight">#FFE5CC</color>
     <color name="banana">#FFFF99</color>
+    <color name="bananaLight">#FFFFBB</color>
     <color name="red">#FF0000</color>
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+
 </resources>

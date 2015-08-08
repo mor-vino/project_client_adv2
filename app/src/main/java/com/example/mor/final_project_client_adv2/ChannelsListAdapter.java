@@ -1,5 +1,4 @@
 package com.example.mor.final_project_client_adv2;
-
 import android.app.Activity;
 import android.app.Fragment;
 import android.content.Context;
@@ -30,6 +29,7 @@ public class ChannelsListAdapter extends BaseAdapter {
         if (inflater == null) {
             inflater = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         }
+
         if (convertView == null) {
             convertView = inflater.inflate(R.layout.list_channel_item, null);
         }
@@ -40,8 +40,9 @@ public class ChannelsListAdapter extends BaseAdapter {
 
         ChannelItem item = items.get(position);
 
-        imageIcon.setImageResource(item.getIcon());
-        textTitle.setText(item.getTitle());
+        // TODO update the icon tu the one from server
+        //imageIcon.setImageResource(R.mipmap.icon_channels_lg);
+        textTitle.setText(item.getID());
         layout.setOnClickListener(item.getListener());
 
         return convertView;

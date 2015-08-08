@@ -14,6 +14,7 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.location.Location;
 import android.location.LocationListener;
+import android.os.AsyncTask;
 import android.os.Bundle;
 
 import android.os.Parcelable;
@@ -41,6 +42,17 @@ import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.protocol.BasicHttpContext;
+import org.apache.http.protocol.HttpContext;
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
@@ -71,6 +83,9 @@ public class MapsActivity extends FragmentActivity implements
     private ArrayList<ChannelItem> channelItemsList;
 
     private ServerInfo si;
+
+
+
 
 
 
@@ -140,9 +155,11 @@ public class MapsActivity extends FragmentActivity implements
             // set the bundle as arguments to the channels fragment
             chanelsListFragment.setArguments(chanArrBundle);
 
-            ft.add(R.id.act_maps_land_channels_list,chanelsListFragment);
+            ft.add(R.id.act_maps_land_channels_list, chanelsListFragment);
             ft.addToBackStack(null);
             ft.commit();
+
+            new GetMyChannels(this).execute("http://" + OnTokenAcquired.APP_ID + ".appspot.com/getMyChannels");
         }
 
     }
@@ -377,6 +394,8 @@ public class MapsActivity extends FragmentActivity implements
 
         public void onAccuracyChanged(Sensor sensor, int accuracy) {
         }
-    };
 
+
+    };
+    // the class responsible on getting the list of MY channels from server
 }

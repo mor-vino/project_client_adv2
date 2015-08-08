@@ -40,7 +40,7 @@ public class MenuFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view =  inflater.inflate(R.layout.fragment_menu, container, false);
+        View view = inflater.inflate(R.layout.fragment_menu, container, false);
         if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
             Button channelsListBtn = (Button) view.findViewById(R.id.frag_menu_chan_list_btnId);
             // define the channels list button
@@ -49,29 +49,23 @@ public class MenuFragment extends Fragment {
                 public void onClick(View v) {
                     FragmentManager fm = getFragmentManager();
                     FragmentTransaction ft = fm.beginTransaction();
+                    // TODO -- BUG >  ChannelListFragment
                     ft.add(R.id.act_maps_channel_list_layout_portrait_id, new ChannelListFragment());
                     ft.addToBackStack(null);
                     ft.commit();
                 }
             });
-            // define the adding new channel button
-            Button addChannelBtn = (Button) view.findViewById(R.id.frag_menu_add_channel_btnId);
-            addChannelBtn.setOnClickListener(new View.OnClickListener() {
+
+            // enter the channels options button
+            Button channelsOptionsBtn = (Button) view.findViewById(R.id.frag_menu_chans_opt_btnId);
+            channelsOptionsBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent i = new Intent(getActivity(), AddNewChannelActivity.class);
+                    Intent i = new Intent(getActivity(), ChannelsOptions.class);
                     startActivity(i);
                 }
             });
-            // define the removing channel button
-            Button rmvChannelBtn = (Button) view.findViewById(R.id.frag_menu_rmv_channel_btnId);
-            rmvChannelBtn.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent i = new Intent(getActivity(), RemoveChannelActivity.class);
-                    startActivity(i);
-                }
-            });
+
             Button logOutBtn = (Button) view.findViewById(R.id.frag_menu_logout_btn);
             logOutBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -79,10 +73,21 @@ public class MenuFragment extends Fragment {
                     new Logoff().execute("http://" + appId + ".appspot.com/logoff");
                 }
             });
+
             Button settingsBtn = (Button) view.findViewById(R.id.frag_menu_settings_btnId);
             settingsBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    Intent i = new Intent(getActivity(), SettingsActivity.class);
+                    startActivity(i);
+                }
+            });
+
+            Button updatesBtn = (Button) view.findViewById(R.id.frag_menu_updates_btnId);
+            updatesBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    // TODO --- change to function that update from server
                     Intent i = new Intent(getActivity(), SettingsActivity.class);
                     startActivity(i);
                 }
