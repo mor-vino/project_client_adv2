@@ -60,7 +60,11 @@ public class JoinChannel extends AsyncTask<String, String, String> {
             int status = obj.getInt("status");
             if (status == 1) {
                 Toast t = Toast.makeText(this.myActivity.getApplicationContext(),
-                        "welcome to channel:" + id + ", you joined successfully", Toast.LENGTH_SHORT);
+                        "welcome to channel:" + id, Toast.LENGTH_SHORT);
+                t.show();
+            } else {
+                Toast t = Toast.makeText(this.myActivity.getApplicationContext(),
+                        "response from server : error", Toast.LENGTH_SHORT);
                 t.show();
             }
         } catch (Exception e) {
