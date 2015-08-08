@@ -179,6 +179,8 @@ public class MapsActivity extends FragmentActivity implements
         IntentFilter intentF= new IntentFilter();
         intentF.addAction(ReloadService.DONE);
         registerReceiver(reloadDone, intentF);
+        SharedPreferences sp = getSharedPreferences("MyServer", MODE_PRIVATE);
+        new GetUpdatesFromServer(MapsActivity.this, sp.getString("serverName", "mpti-2048"));
     }
 
 
