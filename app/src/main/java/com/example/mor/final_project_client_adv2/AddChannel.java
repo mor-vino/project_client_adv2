@@ -43,16 +43,20 @@ public class AddChannel extends AsyncTask<String, String, String>{
         HttpPost httpPost = new HttpPost(params[0]);
         HttpResponse response;
         try {
+            // the parameters for the post request
             List<NameValuePair> NVList = new ArrayList<NameValuePair>(3);
             NVList.add(new BasicNameValuePair("id", params[1]));
             NVList.add(new BasicNameValuePair("name", params[2]));
             NVList.add(new BasicNameValuePair("icon", params[3]));
+            // add the parameters
             httpPost.setEntity(new UrlEncodedFormEntity(NVList));
         }catch (Exception e) {
+            // if there was an exception
             e.printStackTrace();
             cancel(true);
         }
         try {
+            // try to execute
             response = httpclient.execute(httpPost);
             text = getASCIIContentFromEntity(response.getEntity());
         } catch (Exception e) {
