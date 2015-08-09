@@ -28,19 +28,11 @@
             android:text="Add new channel"/>
 
         <Button
-            android:id="@+id/act_chans_opt_remove_chan"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@color/bananaLight"
-            android:text="Remove channel"/>
-
-        <Button
             android:id="@+id/act_chans_opt_join_chan"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@color/banana"
+            android:background="@color/bananaLight"
             android:text="Join existing channel"/>
 
         <Button
@@ -48,7 +40,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@color/bananaLight"
+            android:background="@color/banana"
             android:text="Leave channel"/>
 
     </LinearLayout>

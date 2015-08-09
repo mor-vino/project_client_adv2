@@ -142,7 +142,6 @@ public class MapsActivity extends FragmentActivity implements
             ft.addToBackStack(null);
             ft.commit();
             SharedPreferences sp = getSharedPreferences("MyServer", MODE_PRIVATE);
-            new GetMyChannels(this).execute("http://" + sp.getString("serverName", "mpti-2048") + ".appspot.com/getMyChannels");
         }
 
     }

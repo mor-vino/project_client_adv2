@@ -14,13 +14,10 @@ public class GetUpdatesFromServer {
         app_Id = appId;
     }
     public void syncAllUpdates(){
-        syncMyChannelsUpdates();
         syncAllChannelsUpdates();
         syncAllChannelsMembersUpdates();
     }
-    public void syncMyChannelsUpdates(){
-        new GetMyChannels(myActivity).execute("http://" + app_Id + ".appspot.com/getMyChannels");
-    }
+
     public void syncAllChannelsUpdates(){
         new GetAllChannels(myActivity).execute("http://" + app_Id + ".appspot.com/getChannels");
     }

@@ -28,7 +28,7 @@ public class LeaveChannelActivity extends ActionBarActivity {
         // load the channels list from shared preference
         spinner = (Spinner) findViewById(R.id.act_leave_chan_spinner);
         channelsList = new ArrayList<String>();
-        SharedPreferences myChannels_IdName_SP =  getSharedPreferences("MyChannels_IdName_SP", Context.MODE_PRIVATE);
+        SharedPreferences myChannels_IdName_SP =  getSharedPreferences("MyChannels_Id_SP", Context.MODE_PRIVATE);
         Map<String,?> keys = myChannels_IdName_SP.getAll();
         for(Map.Entry<String,?> entry : keys.entrySet()){
             String id =  entry.getKey();

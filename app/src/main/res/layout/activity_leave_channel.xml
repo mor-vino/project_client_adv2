@@ -1,0 +1,57 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context="com.example.mor.final_project_client_adv2.LeaveChannelActivity"
+    android:background="#FFEE99">
+
+    <ImageView
+        android:id="@+id/act_leave_chan_icon"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_centerVertical="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:src="@drawable/rmv_chan"
+        />
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/act_leave_text_view"
+        android:layout_below="@+id/act_leave_chan_icon"
+        android:text="Choose channel to leave"
+        android:textSize="20dp"
+        android:textColor="#FF0000"
+        android:layout_marginTop="20dp"/>
+
+    <Spinner
+        android:id="@+id/act_leave_chan_spinner"
+        android:backgroundTint="@color/peach"
+        android:scrollbarSize="100dp"
+        android:layout_marginTop="20dp"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/act_leave_text_view"
+        android:layout_alignParentStart="true"
+        android:background="#FFFF99"
+        android:padding="10dp" />
+
+    <Button
+        android:id="@+id/act_leave_chan_btn"
+        android:layout_width="wrap_content"
+        android:layout_marginTop="40dp"
+        android:layout_height="wrap_content"
+        android:text="Leave"
+        android:padding="0dp"
+        android:shadowColor="#000000"
+        android:background="#FFFF99"
+        android:textSize="20dp"
+        android:layout_below="@+id/act_leave_chan_spinner"
+        android:textColor="#FF0000"
+        android:layout_centerInParent="true"
+        />
+
+</RelativeLayout>

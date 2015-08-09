@@ -54,7 +54,7 @@ public class JoinChannelActivity extends ActionBarActivity {
                 public void onClick(View v) {
                     int i = spinner.getSelectedItemPosition();
                     id = channelsList.get(i);
-                    SharedPreferences myChannels_IdName_SP =  getSharedPreferences("MyChannels_IdName_SP", Context.MODE_PRIVATE);
+                    SharedPreferences myChannels_IdName_SP =  getSharedPreferences("MyChannels_Id_SP", Context.MODE_PRIVATE);
                     // if the return value is not the DEFAULT, it means that it already joined that channel
                     if (!(name = myChannels_IdName_SP.getString(id, DEFAULT)).equals(DEFAULT)){
                         Toast t = Toast.makeText(getApplicationContext(), "you are already connected to this channel",
