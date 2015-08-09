@@ -42,21 +42,7 @@ import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.protocol.BasicHttpContext;
-import org.apache.http.protocol.HttpContext;
-import org.json.JSONArray;
-import org.json.JSONObject;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.GregorianCalendar;
-import java.util.List;
 
 public class MapsActivity extends FragmentActivity implements
         GoogleApiClient.OnConnectionFailedListener, LocationListener,
@@ -83,9 +69,6 @@ public class MapsActivity extends FragmentActivity implements
     private ArrayList<ChannelItem> channelItemsList;
 
     private ServerInfo si;
-
-
-
 
 
 
@@ -159,7 +142,6 @@ public class MapsActivity extends FragmentActivity implements
             ft.addToBackStack(null);
             ft.commit();
             SharedPreferences sp = getSharedPreferences("MyServer", MODE_PRIVATE);
-            new GetMyChannels(this).execute("http://" + sp.getString("serverName", "mpti-2048") + ".appspot.com/getMyChannels");
         }
 
     }

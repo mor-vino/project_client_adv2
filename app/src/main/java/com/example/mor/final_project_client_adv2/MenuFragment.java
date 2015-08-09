@@ -91,6 +91,9 @@ public class MenuFragment extends Fragment {
             updatesBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    // tell the user to wait
+                    Toast t = Toast.makeText(getActivity().getApplicationContext(), "please wait", Toast.LENGTH_LONG);
+                    t.show();
                     // create an object of the updates class
                     GetUpdatesFromServer upd = new GetUpdatesFromServer(getActivity(), appId);
                     // syncronize all updates with the current server

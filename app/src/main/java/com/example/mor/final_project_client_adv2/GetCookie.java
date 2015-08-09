@@ -39,10 +39,7 @@ public class GetCookie extends AsyncTask<String, Void, Boolean> {
         this.appId = appId;
         this.context = context;
         SharedPreferences sharedPreferences = act.getSharedPreferences("MyServer", Context.MODE_PRIVATE);
-        this.LINK_TO_GET_AUTHENTICATED = sharedPreferences.getString("serverURL", "err");
-        if(this.LINK_TO_GET_AUTHENTICATED.equals("err")) {
-            this.LINK_TO_GET_AUTHENTICATED = "mpti-2048";
-        }
+        this.LINK_TO_GET_AUTHENTICATED = sharedPreferences.getString("serverURL", "mpti-2048");
     }
 
     /**
@@ -51,9 +48,7 @@ public class GetCookie extends AsyncTask<String, Void, Boolean> {
      * @return successful status
      */
     protected Boolean doInBackground(String... tokens) {
-
         try {
-
             // Don't follow redirects
             params.setBooleanParameter(ClientPNames.HANDLE_REDIRECTS, false);
 

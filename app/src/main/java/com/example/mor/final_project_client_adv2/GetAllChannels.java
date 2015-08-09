@@ -45,7 +45,11 @@ public class GetAllChannels extends AsyncTask<String, String, String> {
             HttpEntity entity = response.getEntity();
             text = getASCIIContentFromEntity(entity);
 
-        } catch (Exception e) {}
+        } catch (Exception e) {
+            Toast toast = Toast.makeText( myActivity.getApplicationContext(),
+                    "error!",  Toast.LENGTH_SHORT);
+            toast.show();
+        }
 
         return text;
     }
@@ -69,13 +73,15 @@ public class GetAllChannels extends AsyncTask<String, String, String> {
                 editor2.commit();
             }
             Toast toast = Toast.makeText( myActivity.getApplicationContext(),
-                    "finished enter ALL channels to SP!",  Toast.LENGTH_SHORT);
+                    "finish update ALL CHANNELS SharedPref",  Toast.LENGTH_SHORT);
             toast.show();
         } catch (Exception e) {
             e.printStackTrace();
+            Toast toast = Toast.makeText( myActivity.getApplicationContext(),
+                    "error!",  Toast.LENGTH_SHORT);
+            toast.show();
         }
     }
-
 
     protected String getASCIIContentFromEntity(HttpEntity entity)
             throws IllegalStateException, IOException {

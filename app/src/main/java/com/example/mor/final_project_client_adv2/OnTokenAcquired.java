@@ -49,7 +49,9 @@ public class OnTokenAcquired implements AccountManagerCallback<Bundle>  {
     protected void setAuthToken(Bundle bundle) {
         String authToken = bundle.getString(AccountManager.KEY_AUTHTOKEN);
 
+        //
         new GetCookie(httpclient, APP_ID, activity.getBaseContext(), activity).execute(authToken);
+
         Intent i = new Intent(activity, MapsActivity.class);
         activity.startActivity(i);
     }

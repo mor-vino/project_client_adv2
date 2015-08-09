@@ -30,8 +30,8 @@ public class GetNetwork extends AsyncTask<String, String, String> {
     String text = null;
     String message = null , name , id , icon;
     Set<String> members = new HashSet<String>();
-    public SharedPreferences sharedPref;
     public SharedPreferences allChannelsAndMembers_IdNames_SP;
+    public SharedPreferences myChannels_Id_SP;
     Activity myActivity;
 
     /**
@@ -41,6 +41,7 @@ public class GetNetwork extends AsyncTask<String, String, String> {
     public GetNetwork(Activity act) {
         myActivity = act;
         allChannelsAndMembers_IdNames_SP = act.getSharedPreferences("AllChannelsAndMembers_IdNames_SP", Context.MODE_PRIVATE);
+        myChannels_Id_SP = act.getSharedPreferences("MyChannels_Id_SP", Context.MODE_PRIVATE);
     }
 
     /**
@@ -74,21 +75,34 @@ public class GetNetwork extends AsyncTask<String, String, String> {
             obj = new JSONObject(result);
             JSONArray channels = obj.getJSONArray("channels");
             JSONObject data;
+            // pass over all the channels
             for (int i = 0; i < channels.length(); i++) {
                 data = channels.getJSONObject(i);
+                id = data.getString("id");
                 JSONArray members = data.getJSONArray("members");
-                for (int j=0; i<members.length(); j++) {
-                    this.members.add(members.getString(j));
+                // pass over all the members of a channel
+                for (int j=0; j <members.length(); j++) {
+                    String currentMember = members.getString(j);
+                    this.members.add(currentMember);
+                    // check if this nickname is my nickname
+                    SharedPreferences  myAccount= myActivity.getSharedPreferences("MyAccount", Context.MODE_PRIVATE);
+                    if((currentMember.equals(myAccount.getString("nickname", "-1"))) &&
+                            (!currentMember.equals("-1"))){
+                        SharedPreferences.Editor edit = myChannels_Id_SP.edit();
+                        // add this channel id to MY channels shared pref'
+                        edit.putString(id,"");
+                        edit.commit();
+                        // exit
+                        j = members.length();
+                    }
                 }
                 final String id = data.getString("id");
                 SharedPreferences.Editor editor1 = allChannelsAndMembers_IdNames_SP.edit();
                 editor1.putStringSet(id, this.members);
-
                 editor1.commit();
-
             }
             Toast toast = Toast.makeText( myActivity.getApplicationContext(),
-                    "finished enter ALL channels members to SP!",  Toast.LENGTH_SHORT);
+                    "finish update MY CHANNELS SharedPref",  Toast.LENGTH_SHORT);
             toast.show();
         } catch (Exception e) {
             e.printStackTrace();

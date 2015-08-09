@@ -2,7 +2,6 @@ package com.example.mor.final_project_client_adv2;
 
 import android.accounts.Account;
 import android.accounts.AccountManager;
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
@@ -13,6 +12,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import org.apache.http.client.HttpClient;
 import org.apache.http.impl.client.DefaultHttpClient;
@@ -37,7 +37,7 @@ public class LoginActivity extends ActionBarActivity {
         accountManager = AccountManager.get(getApplicationContext());
         accounts = accountManager.getAccountsByType("com.google");
 
-        ArrayList<String> accountList = new ArrayList<String>();
+        final ArrayList<String> accountList = new ArrayList<String>();
         for (Account account : accounts) {
             accountList.add(account.name);
         }
@@ -53,7 +53,17 @@ public class LoginActivity extends ActionBarActivity {
             public void onClick(View v) {
                 spinner = (Spinner) findViewById(R.id.act_login_spinner_account);
                 account = accounts[spinner.getSelectedItemPosition()];
-
+                // TODO -- TO DELETE the nickname toast
+                String name = account.name;
+                name = name.split("@")[0];
+                Toast toast = Toast.makeText(getApplicationContext(),
+                        "nickname = " + name,  Toast.LENGTH_SHORT);
+                toast.show();
+                // save the current nickname in the Shared Preferences
+                SharedPreferences  myAccount= getSharedPreferences("MyAccount", MODE_PRIVATE);
+                SharedPreferences.Editor editor = myAccount.edit();
+                editor.putString("nickname", name);
+                editor.commit();
                 accountManager.getAuthToken(account, "ah", null, false, new OnTokenAcquired(httpClient, LoginActivity.this), null);
             }
         });

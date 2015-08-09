@@ -35,14 +35,11 @@ public class ChannelListFragment extends Fragment {
         ListView lstChannels = (ListView) view.findViewById(R.id.frag_channels_list_view_id);
         List<ChannelItem> channelItemsList = new ArrayList<ChannelItem>();
         // TODO
-        SharedPreferences myChannels_IdName_SP =  getActivity().getSharedPreferences("MyChannels_IdName_SP", Context.MODE_PRIVATE);
-        SharedPreferences myChannels_IdIcon_SP =  getActivity().getSharedPreferences("MyChannels_IdIcon_SP", Context.MODE_PRIVATE);
+        SharedPreferences myChannels_IdName_SP =  getActivity().getSharedPreferences("MyChannels_Id_SP", Context.MODE_PRIVATE);
         Map<String,?> keys = myChannels_IdName_SP.getAll();
         for(Map.Entry<String,?> entry : keys.entrySet()){
             String id =  entry.getKey();
-            String name = myChannels_IdName_SP.getString(id, "-1");
-            String icon = myChannels_IdIcon_SP.getString(id, "-1");
-            channelItemsList.add(new ChannelItem(id, name, icon, new View.OnClickListener() {
+            channelItemsList.add(new ChannelItem(id, "n", "M", new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(getActivity(), ChatActivity.class);
