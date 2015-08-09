@@ -38,8 +38,8 @@ public class GetCookie extends AsyncTask<String, Void, Boolean> {
         params = httpclient.getParams();
         this.appId = appId;
         this.context = context;
-        SharedPreferences sharedPreferences = act.getSharedPreferences("MyServer", Context.MODE_PRIVATE);
-        this.LINK_TO_GET_AUTHENTICATED = sharedPreferences.getString("serverURL", "mpti-2048");
+        SharedPreferences SRVRsharedPreferences = act.getSharedPreferences("MyServer", Context.MODE_PRIVATE);
+        this.LINK_TO_GET_AUTHENTICATED = SRVRsharedPreferences.getString("serverURL", "mpti-2048");
     }
 
     /**

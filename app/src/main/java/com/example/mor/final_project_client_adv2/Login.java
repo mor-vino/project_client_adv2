@@ -7,52 +7,43 @@ import android.widget.Toast;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
-import org.apache.http.HttpStatus;
 import org.apache.http.NameValuePair;
-import org.apache.http.StatusLine;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
-import org.apache.http.protocol.BasicHttpContext;
-import org.apache.http.protocol.HttpContext;
 
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
- * class to implement the post request of addChannel
+ * Created by mor on 09/08/2015.
  */
-public class AddChannel extends AsyncTask<String, String, String>{
+public class Login extends AsyncTask<String, String, String> {
     //members
     private Context context;
     private Activity myActivity;
     private String result = null;
-
     /**
      * constructor
      * @param act the current activity
      */
-    public AddChannel(Activity act){
+    public Login(Activity act){
         myActivity = act;
         context = myActivity.getBaseContext();
     }
+
     @Override
     protected String doInBackground(String... params) {
         DefaultHttpClient httpclient = new DefaultHttpClient();
-        HttpPost httpPost = new HttpPost(params[0]);
+        HttpPost httpPost = new HttpPost(params[0] + "/login");
         HttpResponse response;
         //try to send post request
         try {
-            List<NameValuePair> NVList = new ArrayList<NameValuePair>(3);
-            NVList.add(new BasicNameValuePair("id", params[1]));
-            NVList.add(new BasicNameValuePair("name", params[2]));
-            NVList.add(new BasicNameValuePair("icon", params[3]));
+            List<NameValuePair> NVList = new ArrayList<NameValuePair>(0);
+            //NVList.add(new BasicNameValuePair("id", params[1]));
             httpPost.setEntity(new UrlEncodedFormEntity(NVList));
             response = httpclient.execute(httpPost);
             result = getASCIIContentFromEntity(response.getEntity());
