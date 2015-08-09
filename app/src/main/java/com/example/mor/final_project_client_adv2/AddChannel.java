@@ -25,10 +25,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by mor on 09/08/2015.
- * class to implement the posr request
+ * 
+ * class to implement the post request of addChannel
  */
-public class PostRequest extends AsyncTask<String, String, String>{
+public class AddChannel extends AsyncTask<String, String, String>{
     //members
     private String content;
     private Context context;
@@ -39,7 +39,7 @@ public class PostRequest extends AsyncTask<String, String, String>{
      * constructor
      * @param act the current activity
      */
-    public PostRequest(Activity act){
+    public AddChannel(Activity act){
         myActivity = act;
         content =  null;
         context = myActivity.getBaseContext();
@@ -69,8 +69,8 @@ public class PostRequest extends AsyncTask<String, String, String>{
     }
 
     //display the response from the request above
-    protected void onPostExecute(Boolean result) {
-        Toast.makeText(context, "Response from request: " + content,
+    protected void onPostExecute(String result) {
+        Toast.makeText(context, "Response from request: " + result,
                 Toast.LENGTH_LONG).show();
     }
 
@@ -94,5 +94,4 @@ public class PostRequest extends AsyncTask<String, String, String>{
         }
         return out.toString();
     }
-
 }
