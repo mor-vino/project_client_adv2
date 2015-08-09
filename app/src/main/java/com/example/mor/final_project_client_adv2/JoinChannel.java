@@ -24,6 +24,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by mor on 07/08/2015.
@@ -49,19 +50,19 @@ public class JoinChannel extends AsyncTask<String, String, String> {
      * @return the result
      */
     protected String doInBackground(String... params) {
-        DefaultHttpClient httpClient = new DefaultHttpClient();
+        DefaultHttpClient httpclient = new DefaultHttpClient();
         HttpPost httpPost = new HttpPost(params[0]);
+        HttpResponse response;
         try {
-            ArrayList<NameValuePair> parameters = new ArrayList<NameValuePair>();
-            parameters.add(new BasicNameValuePair("id", params[1]));
-            id = params[1];
-            httpPost.setEntity(new UrlEncodedFormEntity(parameters, "UTF-8"));
-            // response
-            HttpResponse response = httpClient.execute(httpPost);
-            HttpEntity entity = response.getEntity();
-            text = getASCIIContentFromEntity(entity);
-            return text;
-        } catch (Exception e) {}
+            List<NameValuePair> NVList = new ArrayList<NameValuePair>(1);
+            NVList.add(new BasicNameValuePair("id", params[1]));
+            httpPost.setEntity(new UrlEncodedFormEntity(NVList));
+            response = httpclient.execute(httpPost);
+            text = getASCIIContentFromEntity(response.getEntity());
+        }catch (Exception e) {
+            e.printStackTrace();
+            cancel(true);
+        }
         return text;
     }
 

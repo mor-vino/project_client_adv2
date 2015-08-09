@@ -52,7 +52,7 @@ public class AddNewChannelActivity extends ActionBarActivity {
                 if(allChannels.contains(id)){
                     //let the user know that it already exist
                     Toast t = Toast.makeText(getApplicationContext(), "the channel already exist \n " +
-                            "you can join it using JOIN EXISTING CHANNEL tab", Toast.LENGTH_LONG);
+                            "please enter JOIN EXISTING CHANNEL tab", Toast.LENGTH_LONG);
                     t.show();
                 }else {
                     // tell the user to wait
@@ -62,10 +62,9 @@ public class AddNewChannelActivity extends ActionBarActivity {
                     SharedPreferences sp = getSharedPreferences("MyServer", Context.MODE_PRIVATE);
                     String appId = sp.getString("serverName", "mpti-2048");
                     // TODO -- ADDING NEW CHANNEL CLASS
-                    new PostRequest(AddNewChannelActivity.this).execute("http://" + appId + ".appspot.com/addChannel", id);
+                    new AddChannel(AddNewChannelActivity.this).execute("http://" + appId + ".appspot.com/addChannel", id, name, icon);
 
                 }
-
             }
         });
     }
