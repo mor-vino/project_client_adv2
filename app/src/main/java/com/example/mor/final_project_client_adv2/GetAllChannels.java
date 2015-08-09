@@ -45,7 +45,11 @@ public class GetAllChannels extends AsyncTask<String, String, String> {
             HttpEntity entity = response.getEntity();
             text = getASCIIContentFromEntity(entity);
 
-        } catch (Exception e) {}
+        } catch (Exception e) {
+            Toast toast = Toast.makeText( myActivity.getApplicationContext(),
+                    "error!",  Toast.LENGTH_SHORT);
+            toast.show();
+        }
 
         return text;
     }
@@ -73,6 +77,9 @@ public class GetAllChannels extends AsyncTask<String, String, String> {
             toast.show();
         } catch (Exception e) {
             e.printStackTrace();
+            Toast toast = Toast.makeText( myActivity.getApplicationContext(),
+                    "error!",  Toast.LENGTH_SHORT);
+            toast.show();
         }
     }
 

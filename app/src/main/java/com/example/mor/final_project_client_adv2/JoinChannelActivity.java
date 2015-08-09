@@ -1,11 +1,8 @@
 package com.example.mor.final_project_client_adv2;
 
-import android.accounts.Account;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -13,7 +10,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -36,7 +32,6 @@ public class JoinChannelActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_join_channel);
 
-        // put the channels fragment in this screen in a specific layout
         spinner = (Spinner) findViewById(R.id.act_join_chan_spinner_account);
         channelsList = new ArrayList<String>();
 
@@ -66,14 +61,16 @@ public class JoinChannelActivity extends ActionBarActivity {
                                 Toast.LENGTH_LONG);
                         t.show();
                     } else {
+                        // tell the user to wait
+                        Toast t = Toast.makeText(getApplicationContext(), "please wait", Toast.LENGTH_LONG);
+                        t.show();
                         // ask the server to join to this channel
                         SharedPreferences sp = getSharedPreferences("MyServer", Context.MODE_PRIVATE);
                         String appId = sp.getString("serverName", "err");
                         if(appId.equals("err")) {
                             appId = "mpti-2048";
                         }
-                        DefaultHttpClient httpClient = new DefaultHttpClient();
-                        new JoinChannel(JoinChannelActivity.this, httpClient).execute("http://" + appId + ".appspot.com/joinChannel", id);
+                        new JoinChannel(JoinChannelActivity.this).execute("http://" + appId + ".appspot.com/joinChannel", id);
                     }
                 }
             });

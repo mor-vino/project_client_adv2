@@ -32,9 +32,8 @@ public class JoinChannel extends AsyncTask<String, String, String> {
     String text = null;
     String id;
     private Activity myActivity;
-    private DefaultHttpClient httpClient;
-    public JoinChannel(Activity act, DefaultHttpClient httpClient){
-        this.httpClient = httpClient;
+
+    public JoinChannel(Activity act){
         this.myActivity = act;
     }
 

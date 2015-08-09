@@ -48,10 +48,6 @@
             android:name=".AddNewChannelActivity"
             android:label="@string/title_activity_add_new_channel" >
         </activity>
-        <activity
-            android:name=".RemoveChannelActivity"
-            android:label="@string/title_activity_remove_channel" >
-        </activity>
 
         <service
             android:name=".ReloadService"
@@ -70,7 +66,7 @@
         <activity
             android:name=".SettingsActivity"
             android:label="@string/title_activity_settings"
-            android:noHistory="true">
+            android:noHistory="true" >
         </activity>
         <activity
             android:name=".JoinChannelActivity"
@@ -79,6 +75,10 @@
         <activity
             android:name=".ChannelsOptions"
             android:label="@string/title_activity_channels_options" >
+        </activity>
+        <activity
+            android:name=".LeaveChannelActivity"
+            android:label="@string/title_activity_leave_channel" >
         </activity>
     </application>
 

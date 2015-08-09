@@ -24,22 +24,23 @@ public class ChannelsOptions extends ActionBarActivity {
                 startActivity(i);
             }
         });
-        // define the removing channel button
-        Button rmvChannelBtn = (Button) findViewById(R.id.act_chans_opt_remove_chan);
-        rmvChannelBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(ChannelsOptions.this, RemoveChannelActivity.class);
-                startActivity(i);
-            }
-        });
 
-        // define the removing channel button
+        // define the joining channel button
         Button joinChannelBtn = (Button) findViewById(R.id.act_chans_opt_join_chan);
         joinChannelBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(ChannelsOptions.this, JoinChannelActivity.class);
+                startActivity(i);
+            }
+        });
+
+        // define the leaving channel button
+        Button lvChannelBtn = (Button) findViewById(R.id.act_chans_opt_leave_chan);
+        lvChannelBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(ChannelsOptions.this, LeaveChannelActivity.class);
                 startActivity(i);
             }
         });
