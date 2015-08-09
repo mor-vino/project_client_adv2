@@ -14,11 +14,19 @@ import android.widget.TextView;
 
 import java.util.List;
 
+/**
+ * class to contain the adapter for the channel list
+ */
 public class ChannelsListAdapter extends BaseAdapter {
     private FragmentActivity activity;
     private List<ChannelItem> items;
     private LayoutInflater inflater;
 
+    /**
+     * constructor
+     * @param activity to controll the list
+     * @param items to enter the list
+     */
     public ChannelsListAdapter(FragmentActivity activity, List<ChannelItem> items) {
         this.activity = activity;
         this.items = items;

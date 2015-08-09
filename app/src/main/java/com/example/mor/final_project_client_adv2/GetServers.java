@@ -20,6 +20,7 @@ import java.util.List;
 
 /**
  * Created by paz on 07/08/2015.
+ * hold the server params
  */
 public class GetServers extends AsyncTask<String, String, String> {
     private String text = null;
@@ -57,6 +58,14 @@ public class GetServers extends AsyncTask<String, String, String> {
             e.printStackTrace();
         }
     }
+
+    /**
+     *
+     * @param entity url
+     * @return the result
+     * @throws IllegalStateException
+     * @throws IOException
+     */
     protected String getASCIIContentFromEntity(HttpEntity entity)
             throws IllegalStateException, IOException {
         InputStream in = entity.getContent();

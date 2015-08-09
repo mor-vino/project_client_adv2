@@ -13,8 +13,12 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.params.HttpParams;
 import java.io.ByteArrayOutputStream;
 
+/**
+ * class to manage the cookies
+ * authentication infront the server
+ */
 public class GetCookie extends AsyncTask<String, Void, Boolean> {
-
+    //members
     String appId;
     HttpParams params;
     private HttpResponse response;
@@ -22,6 +26,13 @@ public class GetCookie extends AsyncTask<String, Void, Boolean> {
     Context context;
     private DefaultHttpClient httpclient;
 
+    /**
+     * constructor
+     * @param httpclient the url
+     * @param appId the id tof the app
+     * @param context of the device
+     * @param act activity
+     */
     public GetCookie(DefaultHttpClient httpclient, String appId, Context context, Activity act) {
         this.httpclient = httpclient;
         params = httpclient.getParams();
@@ -31,6 +42,11 @@ public class GetCookie extends AsyncTask<String, Void, Boolean> {
         this.LINK_TO_GET_AUTHENTICATED = sharedPreferences.getString("serverURL", "mpti-2048");
     }
 
+    /**
+     * authentication infront the server in the buckground
+     * @param tokens
+     * @return successful status
+     */
     protected Boolean doInBackground(String... tokens) {
         try {
             // Don't follow redirects
@@ -65,6 +81,10 @@ public class GetCookie extends AsyncTask<String, Void, Boolean> {
         return false;
     }
 
+    /**
+     * send post request for the server
+     * @param result boolean
+     */
     protected void onPostExecute(Boolean result)
     {
         new Auth(httpclient, context).execute(LINK_TO_GET_AUTHENTICATED);
