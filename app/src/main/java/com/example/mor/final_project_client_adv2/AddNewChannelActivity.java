@@ -65,7 +65,6 @@ public class AddNewChannelActivity extends ActionBarActivity {
                     new AddChannel(AddNewChannelActivity.this).execute("http://" + appId + ".appspot.com/addChannel", id, name, icon);
 
                 }
-
             }
         });
     }

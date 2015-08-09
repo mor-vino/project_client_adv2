@@ -31,7 +31,7 @@ public class AddChannel extends AsyncTask<String, String, String>{
     private String content;
     private Context context;
     private Activity myActivity;
-    private String result = null;
+    private String text = null;
     public AddChannel(Activity act){
         myActivity = act;
         content =  null;
@@ -54,12 +54,12 @@ public class AddChannel extends AsyncTask<String, String, String>{
         }
         try {
             response = httpclient.execute(httpPost);
-            result = getASCIIContentFromEntity(response.getEntity());
+            text = getASCIIContentFromEntity(response.getEntity());
         } catch (Exception e) {
             e.printStackTrace();
             cancel(true);
         }
-        return result;
+        return text;
     }
 
     //display the response from the request above
