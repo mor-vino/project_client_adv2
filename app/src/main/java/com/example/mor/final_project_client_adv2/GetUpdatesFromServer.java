@@ -24,16 +24,8 @@ public class GetUpdatesFromServer {
      * sync all the update
      */
     public void syncAllUpdates(){
-        syncMyChannelsUpdates();
         syncAllChannelsUpdates();
         syncAllChannelsMembersUpdates();
-    }
-
-    /**
-     * sync the current channel
-     */
-    public void syncMyChannelsUpdates(){
-        new GetMyChannels(myActivity).execute("http://" + app_Id + ".appspot.com/getMyChannels");
     }
 
     /**
