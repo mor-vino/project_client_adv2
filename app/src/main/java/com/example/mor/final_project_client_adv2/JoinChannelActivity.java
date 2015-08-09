@@ -17,6 +17,8 @@ import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import org.apache.http.impl.client.DefaultHttpClient;
+
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -70,7 +72,8 @@ public class JoinChannelActivity extends ActionBarActivity {
                         if(appId.equals("err")) {
                             appId = "mpti-2048";
                         }
-                        new JoinChannel(JoinChannelActivity.this).execute("http://" + appId + ".appspot.com/joinChannel", id);
+                        DefaultHttpClient httpClient = new DefaultHttpClient();
+                        new JoinChannel(JoinChannelActivity.this, httpClient).execute("http://" + appId + ".appspot.com/joinChannel", id);
                     }
                 }
             });
