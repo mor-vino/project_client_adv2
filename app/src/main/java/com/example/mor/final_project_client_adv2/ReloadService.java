@@ -3,16 +3,17 @@ package com.example.mor.final_project_client_adv2;
 import android.app.IntentService;
 import android.content.Intent;
 
-
+/**
+ * class to implement the service
+ */
 public class ReloadService extends IntentService {
     public static final String DONE = "com.example.mor.final_project_client_adv2.Services.ReloadService.DONE";
-
-    // constructor
+    /**
+     * constructor
+     */
     public ReloadService() {
         super("ReloadService");
     }
-
-    // handle function
     @Override
     protected void onHandleIntent(Intent intent) {
         try {

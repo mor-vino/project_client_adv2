@@ -16,8 +16,11 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-
+/**
+ * activity for all the app seting
+ */
 public class SettingsActivity extends ActionBarActivity {
+    //member
     private Spinner serversListSpinner;
     private Spinner bgUpdateSpinner;
     private Spinner fgUpdateSpinner;
@@ -31,10 +34,11 @@ public class SettingsActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
         serversList = new ArrayList<String>();
-        //GetServers gs = new GetServers();
+        //Thread to run on the buckground
         new Thread(new Runnable() {
             GetServers gs =  new GetServers();
             public void run() {
+                //try connect to the server
                 try {
                         runOnUiThread(new Runnable() {
                             SharedPreferences sharedPreferences = getSharedPreferences("MyServer", MODE_PRIVATE);
@@ -90,6 +94,7 @@ public class SettingsActivity extends ActionBarActivity {
                 }
             }
         }).start();
+        //other setting
         bgUpdateSpinner = (Spinner) findViewById(R.id.act_set_spinner_update_bg);
         fgUpdateSpinner = (Spinner) findViewById(R.id.act_set_spinner_update_fg);
         bgUpdateList = new ArrayList<String>();

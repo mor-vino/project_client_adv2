@@ -44,10 +44,13 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.ArrayList;
 
+/**
+ * map activity to show the friends
+ */
 public class MapsActivity extends FragmentActivity implements
         GoogleApiClient.OnConnectionFailedListener, LocationListener,
         com.google.android.gms.location.LocationListener, GoogleApiClient.ConnectionCallbacks{
-
+    //members
     private GoogleMap mMap; // Might be null if Google Play services APK is not available.
     LocationRequest mLocationRequest;
     GoogleApiClient mGoogleApiClient;
@@ -57,19 +60,13 @@ public class MapsActivity extends FragmentActivity implements
     float last_x, last_y, last_z;
     private long lastUpdate;
     private float mAccel; // acceleration apart from gravity
-
     private float mAccelCurrent; // current acceleration including gravity
-
     private float mAccelLast; // last acceleration including gravity
     private static final int SHAKE_THRESHOLD = 6000;
-
     private static final long INTERVAL = 1000 * 10;
     private static final long FASTEST_INTERVAL = 1000 * 5;
-
     private ArrayList<ChannelItem> channelItemsList;
-
     private ServerInfo si;
-
 
 
     @Override
@@ -82,6 +79,7 @@ public class MapsActivity extends FragmentActivity implements
         if(!isGooglePlayServicesAvailable()) {
             finish();
         }
+        //login to google map
         createLocationRequest();
         mGoogleApiClient = new GoogleApiClient.Builder(this)
                 .addApi(LocationServices.API)
@@ -102,6 +100,7 @@ public class MapsActivity extends FragmentActivity implements
                     setFragment();
                 }
             });
+            //menu button
             Button menuBtn = (Button) findViewById(R.id.act_maps_menu_btn_id);
             menuBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -116,6 +115,7 @@ public class MapsActivity extends FragmentActivity implements
                     ft.commit();
                 }
             });
+            //'shake sensor'
             checkRefresh();
             mSensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
             mSensorManager.registerListener(mSensorListener,
@@ -205,6 +205,9 @@ public class MapsActivity extends FragmentActivity implements
         }
     }
 
+    /**
+     * add new location on the map
+     */
     protected void createLocationRequest() {
         mLocationRequest = new LocationRequest();
         mLocationRequest.setInterval(INTERVAL);
@@ -239,6 +242,9 @@ public class MapsActivity extends FragmentActivity implements
                 .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
     }
 
+    /**
+     * set the fragment on the activity
+     */
     private void setFragment() {
         if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
             FragmentManager fm1 = getSupportFragmentManager();
@@ -249,6 +255,11 @@ public class MapsActivity extends FragmentActivity implements
             ft1.commit();
         }
     }
+
+    /**
+     * check for google service
+     * @return true if the service is avilable
+     */
     private boolean isGooglePlayServicesAvailable() {
         int status = GooglePlayServicesUtil.isGooglePlayServicesAvailable(this);
         if (ConnectionResult.SUCCESS == status) {
@@ -264,6 +275,9 @@ public class MapsActivity extends FragmentActivity implements
         startLocationUpdates();
     }
 
+    /**
+     * the first location
+     */
     protected void startLocationUpdates() {
         LocationServices.FusedLocationApi.requestLocationUpdates(
                 mGoogleApiClient, mLocationRequest, (com.google.android.gms.location.LocationListener) this);
@@ -337,7 +351,9 @@ public class MapsActivity extends FragmentActivity implements
                 sensorManager.SENSOR_DELAY_NORMAL);*/
     }
 
-    // "listen" to the DONE broadcast
+    /**
+     *  "listen" to the DONE broadcast
+     */
     private BroadcastReceiver reloadDone = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -359,6 +375,9 @@ public class MapsActivity extends FragmentActivity implements
         registerReceiver(reloadDone, filter);
     }
 
+    /**
+     * sensor event - shake
+     */
     private final SensorEventListener mSensorListener = new SensorEventListener() {
 
         public void onSensorChanged(SensorEvent se) {

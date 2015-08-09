@@ -14,11 +14,17 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
-
+/**
+ * the opening activity
+ */
 public class SplashActivity extends ActionBarActivity {
     private int count;
     private int i;
     ServerInfo si;
+
+    /**
+     * constructor
+     */
     public SplashActivity() {
         super();
         count = 0;
@@ -51,7 +57,8 @@ public class SplashActivity extends ActionBarActivity {
         editUpdates.putInt("bg", 5);
         editUpdates.putInt("fg", 10);
         edit.commit();
-        editUpdates.commit();
+
+        //new thread to upload the data in buckground
         new Thread(new Runnable() {
             public void run() {
                 try {
@@ -82,6 +89,10 @@ public class SplashActivity extends ActionBarActivity {
         setActionBar();
 
     }
+
+    /**
+     * set the new activity to move for
+     */
     private void setActionBar() {
         ActionBar mAction = getSupportActionBar();
         mAction.hide();

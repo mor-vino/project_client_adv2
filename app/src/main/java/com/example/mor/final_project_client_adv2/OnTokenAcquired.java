@@ -11,13 +11,20 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import org.apache.http.impl.client.DefaultHttpClient;
 
-
+/**
+ * manage the account cookies
+ */
 public class OnTokenAcquired implements AccountManagerCallback<Bundle>  {
     private static final int USER_PERMISSION = 989;
     public String APP_ID;
     private DefaultHttpClient httpclient;
     Activity activity;
 
+    /**
+     * constructor
+     * @param httpclient url client
+     * @param activity - current activity
+     */
     public OnTokenAcquired(DefaultHttpClient httpclient, Activity activity) {
         this.httpclient = httpclient;
         this.activity = activity;
@@ -27,6 +34,12 @@ public class OnTokenAcquired implements AccountManagerCallback<Bundle>  {
             this.APP_ID = "mpti-2048";
         }
     }
+
+    /**
+     * the method on the
+     * new thread
+     * @param result
+     */
     public void run(AccountManagerFuture<Bundle> result) {
 
         Bundle bundle;
@@ -45,7 +58,10 @@ public class OnTokenAcquired implements AccountManagerCallback<Bundle>  {
             e.printStackTrace();
         }
     }
-    //using the auth token and ask for a auth cookie
+    /**
+     * using the auth token and ask for a auth cookie
+     * @param bundle
+     */
     protected void setAuthToken(Bundle bundle) {
         String authToken = bundle.getString(AccountManager.KEY_AUTHTOKEN);
 

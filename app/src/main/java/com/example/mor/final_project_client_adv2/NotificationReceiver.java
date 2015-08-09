@@ -6,6 +6,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.NotificationCompat;
 
+/**
+ * class to manege the input notification
+ */
 public class NotificationReceiver extends BroadcastReceiver
 {
     @Override

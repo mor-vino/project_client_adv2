@@ -20,16 +20,31 @@ public class OnSwipeTouchListener implements OnTouchListener {
         gestureDetector = new GestureDetector(context, new GestureListener());
     }
 
+    /**
+     * swipe left event
+     */
     public void onSwipeLeft() {
     }
 
+    /**
+     * swipe right event
+     */
     public void onSwipeRight() {
     }
 
+    /**
+     * on touch event
+     * @param v the viwe
+     * @param event motion
+     * @return true if was touch
+     */
     public boolean onTouch(View v, MotionEvent event) {
         return gestureDetector.onTouchEvent(event);
     }
 
+    /**
+     * gusture listener methode
+     */
     private final class GestureListener extends SimpleOnGestureListener {
 
         private static final int SWIPE_DISTANCE_THRESHOLD = 100;

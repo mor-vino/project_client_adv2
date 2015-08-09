@@ -30,9 +30,16 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.io.InputStream;
 
+/**
+ * menu fragment class
+ */
 public class MenuFragment extends Fragment {
+    //member
     private  String appId;
 
+    /**
+     * constructor
+     */
     public MenuFragment() {
         // Required empty public constructor
     }
@@ -105,9 +112,18 @@ public class MenuFragment extends Fragment {
 
         return view;
     }
+
+    /**
+     * log off the server method
+     */
     private class Logoff extends AsyncTask<String, String, String> {
         String text = null;
 
+        /**
+         * make the log off on buckground
+         * @param params
+         * @return the status
+         */
         protected String doInBackground(String... params) {
             try {
                 HttpContext localContext = new BasicHttpContext();
@@ -124,6 +140,10 @@ public class MenuFragment extends Fragment {
             return text;
         }
 
+        /**
+         * make post request
+         * @param result
+         */
         protected void onPostExecute(String result) {
             JSONObject obj = null;
             try {
@@ -148,6 +168,14 @@ public class MenuFragment extends Fragment {
             }
         }
     }
+
+    /**
+     * get request
+     * @param entity url
+     * @return the status result
+     * @throws IllegalStateException
+     * @throws IOException
+     */
     protected String getASCIIContentFromEntity(HttpEntity entity)
             throws IllegalStateException, IOException {
         InputStream in = entity.getContent();

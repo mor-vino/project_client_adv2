@@ -18,7 +18,9 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import java.util.ArrayList;
 import java.util.Map;
 
-
+/**
+ * activity for new channel
+ */
 public class JoinChannelActivity extends ActionBarActivity {
 
     private String DEFAULT = "-1";
@@ -41,14 +43,16 @@ public class JoinChannelActivity extends ActionBarActivity {
             String id =  entry.getKey();
             channelsList.add(id);
         }
+        //if there is no channels in the llist
         if(channelsList.size()==0) {
             Toast t = Toast.makeText(getApplicationContext(), "no channels to show", Toast.LENGTH_LONG);
             t.show();
-        } else {
+        } else { //add the channel to the list
             ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, channelsList);
             dataAdapter.setDropDownViewResource(R.layout.spinner_item);
             spinner.setAdapter(dataAdapter);
             Button join = (Button) findViewById(R.id.act_join_chan_btn);
+            //make the 'join' button
             join.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

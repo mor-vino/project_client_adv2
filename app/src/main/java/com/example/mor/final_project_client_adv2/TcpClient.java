@@ -5,7 +5,9 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
-
+/**
+ * simple TCP client to comunicate with the server
+ */
 public class TcpClient extends ActionBarActivity {
 
     @Override

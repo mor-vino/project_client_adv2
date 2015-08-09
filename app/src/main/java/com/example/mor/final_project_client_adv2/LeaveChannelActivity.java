@@ -15,7 +15,11 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.Map;
 
+/**
+ * class to implement the chnnel release
+ */
 public class LeaveChannelActivity extends ActionBarActivity {
+    //members
     private String DEFAULT = "-1";
     private Spinner spinner;
     private ArrayList<String> channelsList;
@@ -34,10 +38,11 @@ public class LeaveChannelActivity extends ActionBarActivity {
             String id =  entry.getKey();
             channelsList.add(id);
         }
+        //if there is no channel in the list
         if(channelsList.size()==0) {
             Toast t = Toast.makeText(getApplicationContext(), "no channels to show", Toast.LENGTH_LONG);
             t.show();
-        } else {
+        } else { //unregistered to channel
             ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, channelsList);
             dataAdapter.setDropDownViewResource(R.layout.spinner_item);
             spinner.setAdapter(dataAdapter);

@@ -26,12 +26,19 @@ import java.util.List;
 
 /**
  * Created by mor on 09/08/2015.
+ * class to implement the posr request
  */
 public class PostRequest extends AsyncTask<String, String, String>{
+    //members
     private String content;
     private Context context;
     private Activity myActivity;
     private String result = null;
+
+    /**
+     * constructor
+     * @param act the current activity
+     */
     public PostRequest(Activity act){
         myActivity = act;
         content =  null;
@@ -42,6 +49,7 @@ public class PostRequest extends AsyncTask<String, String, String>{
         DefaultHttpClient httpclient = new DefaultHttpClient();
         HttpPost httpPost = new HttpPost(params[0]);
         HttpResponse response;
+        //try to send post request
         try {
             List<NameValuePair> NVList = new ArrayList<NameValuePair>(1);
             NVList.add(new BasicNameValuePair("link", params[1]));
@@ -66,6 +74,13 @@ public class PostRequest extends AsyncTask<String, String, String>{
                 Toast.LENGTH_LONG).show();
     }
 
+    /**
+     *
+     * @param entity url
+     * @return return the ASCII value
+     * @throws IllegalStateException
+     * @throws IOException
+     */
     protected String getASCIIContentFromEntity(HttpEntity entity)
             throws IllegalStateException, IOException {
         InputStream in = entity.getContent();

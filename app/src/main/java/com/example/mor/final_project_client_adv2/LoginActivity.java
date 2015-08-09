@@ -19,9 +19,12 @@ import org.apache.http.impl.client.DefaultHttpClient;
 
 import java.util.ArrayList;
 
-
+/**
+ * login activity
+ * class to login to the servers
+ */
 public class LoginActivity extends ActionBarActivity {
-
+    //member
     AccountManager accountManager;
     private Account[] accounts;
     Spinner spinner;
@@ -41,12 +44,12 @@ public class LoginActivity extends ActionBarActivity {
         for (Account account : accounts) {
             accountList.add(account.name);
         }
-
+        //spiner to choose the server
         spinner = (Spinner) findViewById(R.id.act_login_spinner_account);
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, accountList);
         dataAdapter.setDropDownViewResource(R.layout.spinner_item);
         spinner.setAdapter(dataAdapter);
-
+        //login button
         ImageButton startAuth = (ImageButton) findViewById(R.id.act_login_send_btn);
         startAuth.setOnClickListener(new View.OnClickListener() {
             @Override
