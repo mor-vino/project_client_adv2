@@ -39,8 +39,8 @@ public class SplashActivity extends ActionBarActivity {
         textLst.add("Mor Zohar");
         textLst.add("Paz Huber");
         //si = new ServerInfo("http://mpti-2048.appspot.com");
-        //si = new ServerInfo("http://chatappserver-985.appspot.com");
-        si = new ServerInfo("http://projectserver-984.appspot.com");
+        si = new ServerInfo("http://chatappserver-985.appspot.com");
+        //si = new ServerInfo("http://projectserver-984.appspot.com");
 
         SharedPreferences sp = getSharedPreferences("MyServer", Context.MODE_PRIVATE);
         SharedPreferences.Editor edit = sp.edit();

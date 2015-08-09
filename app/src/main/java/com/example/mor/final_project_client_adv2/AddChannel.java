@@ -27,12 +27,12 @@ import java.util.List;
 /**
  * Created by mor on 09/08/2015.
  */
-public class PostRequest extends AsyncTask<String, String, String>{
+public class AddChannel extends AsyncTask<String, String, String>{
     private String content;
     private Context context;
     private Activity myActivity;
     private String result = null;
-    public PostRequest(Activity act){
+    public AddChannel(Activity act){
         myActivity = act;
         content =  null;
         context = myActivity.getBaseContext();
@@ -43,9 +43,11 @@ public class PostRequest extends AsyncTask<String, String, String>{
         HttpPost httpPost = new HttpPost(params[0]);
         HttpResponse response;
         try {
-            List<NameValuePair> NVList = new ArrayList<NameValuePair>(1);
-            NVList.add(new BasicNameValuePair("link", params[1]));
-            httpPost.setEntity(new UrlEncodedFormEntity(NVList, "UTF-8"));
+            List<NameValuePair> NVList = new ArrayList<NameValuePair>(3);
+            NVList.add(new BasicNameValuePair("id", params[1]));
+            NVList.add(new BasicNameValuePair("name", params[2]));
+            NVList.add(new BasicNameValuePair("icon", params[3]));
+            httpPost.setEntity(new UrlEncodedFormEntity(NVList));
         }catch (Exception e) {
             e.printStackTrace();
             cancel(true);
@@ -79,5 +81,4 @@ public class PostRequest extends AsyncTask<String, String, String>{
         }
         return out.toString();
     }
-
 }
