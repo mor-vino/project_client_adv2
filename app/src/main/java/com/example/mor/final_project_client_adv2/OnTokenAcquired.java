@@ -9,7 +9,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import org.apache.http.impl.client.DefaultHttpClient;
 
 /**
  * manage the account cookies
@@ -17,16 +16,13 @@ import org.apache.http.impl.client.DefaultHttpClient;
 public class OnTokenAcquired implements AccountManagerCallback<Bundle>  {
     private static final int USER_PERMISSION = 989;
     public String APP_ID;
-    private DefaultHttpClient httpclient;
     Activity activity;
 
     /**
      * constructor
-     * @param httpclient url client
      * @param activity - current activity
      */
-    public OnTokenAcquired(DefaultHttpClient httpclient, Activity activity) {
-        this.httpclient = httpclient;
+    public OnTokenAcquired(Activity activity) {
         this.activity = activity;
         SharedPreferences sharedPreferences = activity.getSharedPreferences("MyServer", Context.MODE_PRIVATE);
         this.APP_ID = sharedPreferences.getString("serverName", "err");
@@ -66,7 +62,7 @@ public class OnTokenAcquired implements AccountManagerCallback<Bundle>  {
         String authToken = bundle.getString(AccountManager.KEY_AUTHTOKEN);
 
         //
-        new GetCookie(httpclient, APP_ID, activity.getBaseContext(), activity).execute(authToken);
+        new GetCookie(APP_ID, activity.getBaseContext(), activity).execute(authToken);
 
         Intent i = new Intent(activity, MapsActivity.class);
         activity.startActivity(i);

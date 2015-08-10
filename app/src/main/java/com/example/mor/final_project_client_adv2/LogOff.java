@@ -7,25 +7,20 @@ import android.widget.Toast;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
-import org.apache.http.HttpStatus;
 import org.apache.http.NameValuePair;
-import org.apache.http.StatusLine;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.message.BasicNameValuePair;
 
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
- * class to implement the post request of addChannel
+ * Created by mor on 10/08/2015.
  */
-public class AddChannel extends AsyncTask<String,String,String>{
+public class LogOff extends AsyncTask<String,String,String> {
     //members
     private Context context;
     private Activity myActivity;
@@ -35,34 +30,30 @@ public class AddChannel extends AsyncTask<String,String,String>{
      * constructor
      * @param act the current activity
      */
-    public AddChannel(Activity act){
+    public LogOff(Activity act){
         myActivity = act;
         context = myActivity.getBaseContext();
-
     }
+
     @Override
     protected String doInBackground(String... params) {
         HttpPost httpPost = new HttpPost(params[0]);
         HttpResponse response;
         //try to send post request
         try {
-            List<NameValuePair> NVList = new ArrayList<NameValuePair>(3);
-            NVList.add(new BasicNameValuePair("id", params[1]));
-            NVList.add(new BasicNameValuePair("name", params[2]));
-            NVList.add(new BasicNameValuePair("icon", params[3]));
+            List<NameValuePair> NVList = new ArrayList<NameValuePair>(0);
             httpPost.setEntity(new UrlEncodedFormEntity(NVList));
             response = HttpClientStatic.httpClient.execute(httpPost);
             result = getASCIIContentFromEntity(response.getEntity());
             return result;
 
-         }catch (Exception e) {
+        }catch (Exception e) {
             e.printStackTrace();
             cancel(true);
         }
-    return result;
+        return result;
 
     }
-
     //display the response from the request above
     protected void onPostExecute(String result) {
         Toast.makeText(context, "Response from request: " + result,

@@ -17,7 +17,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 /**
- * activity for all the app seting
+ * activity for all the app settings
  */
 public class SettingsActivity extends ActionBarActivity {
     //member

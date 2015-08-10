@@ -13,7 +13,10 @@ import org.apache.http.StatusLine;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.protocol.BasicHttpContext;
+import org.apache.http.protocol.HttpContext;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -25,7 +28,7 @@ import java.util.List;
  *
  * class to implement the post request of addChannel
  */
-public class AddChannel extends AsyncTask<String,String,String>{
+public class SendMessage extends AsyncTask<String,String,String>{
     //members
     private Context context;
     private Activity myActivity;
@@ -35,31 +38,33 @@ public class AddChannel extends AsyncTask<String,String,String>{
      * constructor
      * @param act the current activity
      */
-    public AddChannel(Activity act){
+    public SendMessage(Activity act){
         myActivity = act;
         context = myActivity.getBaseContext();
-
     }
+
     @Override
     protected String doInBackground(String... params) {
+        DefaultHttpClient httpclient = new DefaultHttpClient();
         HttpPost httpPost = new HttpPost(params[0]);
         HttpResponse response;
-        //try to send post request
+        //try to send message to server
         try {
-            List<NameValuePair> NVList = new ArrayList<NameValuePair>(3);
-            NVList.add(new BasicNameValuePair("id", params[1]));
-            NVList.add(new BasicNameValuePair("name", params[2]));
-            NVList.add(new BasicNameValuePair("icon", params[3]));
+            List<NameValuePair> NVList = new ArrayList<NameValuePair>(4);
+            NVList.add(new BasicNameValuePair("channel_id", params[1]));
+            NVList.add(new BasicNameValuePair("text", params[2]));
+            NVList.add(new BasicNameValuePair("longtitude", params[3]));
+            NVList.add(new BasicNameValuePair("latitude", params[4]));
             httpPost.setEntity(new UrlEncodedFormEntity(NVList));
-            response = HttpClientStatic.httpClient.execute(httpPost);
+            response = httpclient.execute(httpPost);
             result = getASCIIContentFromEntity(response.getEntity());
             return result;
 
-         }catch (Exception e) {
+        }catch (Exception e) {
             e.printStackTrace();
             cancel(true);
         }
-    return result;
+        return result;
 
     }
 

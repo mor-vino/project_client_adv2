@@ -81,8 +81,7 @@ public class MenuFragment extends Fragment {
             logOutBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    new Logoff().execute("http://" + appId + ".appspot.com/logoff");
-                }
+                    new LogOff(getActivity()).execute("http://" + appId + ".appspot.com/logoff");                }
             });
             // this button is to enter the settings activity
             Button settingsBtn = (Button) view.findViewById(R.id.frag_menu_settings_btnId);

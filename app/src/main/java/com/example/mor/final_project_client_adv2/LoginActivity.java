@@ -14,8 +14,6 @@ import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import org.apache.http.client.HttpClient;
-import org.apache.http.impl.client.DefaultHttpClient;
 
 import java.util.ArrayList;
 
@@ -28,7 +26,6 @@ public class LoginActivity extends ActionBarActivity {
     AccountManager accountManager;
     private Account[] accounts;
     Spinner spinner;
-    DefaultHttpClient httpClient = new DefaultHttpClient();
     Account account;
     ServerInfo si;
 
@@ -56,7 +53,6 @@ public class LoginActivity extends ActionBarActivity {
             public void onClick(View v) {
                 spinner = (Spinner) findViewById(R.id.act_login_spinner_account);
                 account = accounts[spinner.getSelectedItemPosition()];
-                // TODO -- TO DELETE the nickname toast
                 String name = account.name;
                 name = name.split("@")[0];
                 Toast toast = Toast.makeText(getApplicationContext(),
@@ -67,7 +63,8 @@ public class LoginActivity extends ActionBarActivity {
                 SharedPreferences.Editor editor = myAccount.edit();
                 editor.putString("nickname", name);
                 editor.commit();
-                accountManager.getAuthToken(account, "ah", null, false, new OnTokenAcquired(httpClient, LoginActivity.this), null);
+                accountManager.getAuthToken(account, "ah", null, false, new OnTokenAcquired(LoginActivity.this), null);
+
             }
         });
         ActionBar mAction = getSupportActionBar();
@@ -94,8 +91,5 @@ public class LoginActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
-    }
-    public HttpClient getClient () {
-        return this.httpClient;
     }
 }

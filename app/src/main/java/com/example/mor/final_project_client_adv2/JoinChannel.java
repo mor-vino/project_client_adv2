@@ -11,16 +11,9 @@ import org.apache.http.HttpStatus;
 import org.apache.http.NameValuePair;
 import org.apache.http.StatusLine;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
-import org.apache.http.protocol.BasicHttpContext;
-import org.apache.http.protocol.HttpContext;
-import org.json.JSONArray;
-import org.json.JSONObject;
 
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -50,14 +43,13 @@ public class JoinChannel extends AsyncTask<String, String, String> {
      * @return the result
      */
     protected String doInBackground(String... params) {
-        DefaultHttpClient httpclient = new DefaultHttpClient();
         HttpPost httpPost = new HttpPost(params[0]);
         HttpResponse response;
         try {
             List<NameValuePair> NVList = new ArrayList<NameValuePair>(1);
             NVList.add(new BasicNameValuePair("id", params[1]));
             httpPost.setEntity(new UrlEncodedFormEntity(NVList));
-            response = httpclient.execute(httpPost);
+            response = HttpClientStatic.httpClient.execute(httpPost);
             text = getASCIIContentFromEntity(response.getEntity());
         }catch (Exception e) {
             e.printStackTrace();
@@ -70,27 +62,10 @@ public class JoinChannel extends AsyncTask<String, String, String> {
      * send post request
      * @param result
      */
+    //display the response from the request above
     protected void onPostExecute(String result) {
-        JSONObject obj = null;
-        try {
-            obj = new JSONObject(result);
-            int status = obj.getInt("status");
-            if (status == 1) {
-                Toast t = Toast.makeText(this.myActivity.getApplicationContext(),
-                        "welcome to channel:" + id, Toast.LENGTH_SHORT);
-                t.show();
-            } else if (status == 0) {
-                Toast t = Toast.makeText(this.myActivity.getApplicationContext(),
-                        "response from server : error" , Toast.LENGTH_SHORT);
-                t.show();
-            } else {
-                Toast t = Toast.makeText(this.myActivity.getApplicationContext(),
-                        "error", Toast.LENGTH_SHORT);
-                t.show();
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        Toast.makeText(myActivity.getBaseContext(), "Response from request: " + result,
+                Toast.LENGTH_LONG).show();
     }
 
     /**

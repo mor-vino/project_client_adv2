@@ -58,10 +58,10 @@ public class AddNewChannelActivity extends ActionBarActivity {
                     // tell the user to wait
                     Toast t = Toast.makeText(getApplicationContext(), "please wait", Toast.LENGTH_LONG);
                     t.show();
-                    // ask the server to add this channel
+                    // check the current server
                     SharedPreferences sp = getSharedPreferences("MyServer", Context.MODE_PRIVATE);
                     String appId = sp.getString("serverName", "mpti-2048");
-                    // TODO -- ADDING NEW CHANNEL CLASS
+                    // ask the server to add this channel
                     new AddChannel(AddNewChannelActivity.this).execute("http://" + appId + ".appspot.com/addChannel", id, name, icon);
 
                 }

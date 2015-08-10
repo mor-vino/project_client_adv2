@@ -1,73 +1,69 @@
 package com.example.mor.final_project_client_adv2;
-
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.widget.Toast;
 
-import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
-import org.apache.http.NameValuePair;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.client.methods.HttpPost;
+import org.apache.http.HttpStatus;
+import org.apache.http.StatusLine;
+import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.message.BasicNameValuePair;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.List;
+import java.io.ByteArrayOutputStream;
 
 /**
- * Created by mor on 09/08/2015.
+ * class to connect andauthentication
+ * on the server
  */
-public class Login extends AsyncTask<String, String, String> {
-    //members
-    private Context context;
-    private Activity myActivity;
-    private String result = null;
+public class Login extends AsyncTask<String, Void, Boolean> {
+
+    private HttpResponse response;
+    private String content =  null;
+    Context context;
+
     /**
      * constructor
-     * @param act the current activity
+     * @param context to the server
      */
-    public Login(Activity act){
-        myActivity = act;
-        context = myActivity.getBaseContext();
+    public Login(Context context)
+    {
+        this.context = context;
     }
 
-    @Override
-    protected String doInBackground(String... params) {
-        DefaultHttpClient httpclient = new DefaultHttpClient();
-        HttpPost httpPost = new HttpPost(params[0] + "/login");
-        HttpResponse response;
-        //try to send post request
+    /**
+     * func to connect the server in the buckground
+     * @param urls of the server
+     * @return the status of the connection
+     */
+    protected Boolean doInBackground(String... urls) {
+        //try connect
         try {
-            List<NameValuePair> NVList = new ArrayList<NameValuePair>(0);
-            //NVList.add(new BasicNameValuePair("id", params[1]));
-            httpPost.setEntity(new UrlEncodedFormEntity(NVList));
-            response = httpclient.execute(httpPost);
-            result = getASCIIContentFromEntity(response.getEntity());
+
+            HttpGet httpGet = new HttpGet(urls[0] + "/login");
+            response = HttpClientStatic.httpClient.execute(httpGet);
+            StatusLine statusLine = response.getStatusLine();
+            if(statusLine.getStatusCode() == HttpStatus.SC_OK){
+                ByteArrayOutputStream out = new ByteArrayOutputStream();
+                response.getEntity().writeTo(out);
+                out.close();
+                content = out.toString();
+                return true;
+            }
         } catch (Exception e) {
             e.printStackTrace();
             cancel(true);
         }
-        return result;
+        return false;
     }
 
     //display the response from the request above
-    protected void onPostExecute(String result) {
-        Toast.makeText(context, "Response from request: " + result,
+    protected void onPostExecute(Boolean result) {
+        Toast.makeText(context, "Response from request: " + content,
                 Toast.LENGTH_LONG).show();
     }
 
-    /**
-     *
-     * @param entity url
-     * @return return the ASCII value
-     * @throws IllegalStateException
-     * @throws IOException
-     */
-    protected String getASCIIContentFromEntity(HttpEntity entity)
+    /*protected String getASCIIContentFromEntity(HttpEntity entity)
             throws IllegalStateException, IOException {
         InputStream in = entity.getContent();
         StringBuffer out = new StringBuffer();
@@ -79,5 +75,5 @@ public class Login extends AsyncTask<String, String, String> {
                 out.append(new String(b, 0, n));
         }
         return out.toString();
-    }
+    }*/
 }

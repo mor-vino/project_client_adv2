@@ -23,6 +23,7 @@ import java.util.Map;
  */
 public class ChannelListFragment extends Fragment {
     private ListView lstChannels;
+    private String currentId;
 
     public ChannelListFragment() {
         // Required empty public constructor
@@ -36,21 +37,29 @@ public class ChannelListFragment extends Fragment {
         List<ChannelItem> channelItemsList = new ArrayList<ChannelItem>();
         // TODO
         SharedPreferences myChannels_IdName_SP =  getActivity().getSharedPreferences("MyChannels_Id_SP", Context.MODE_PRIVATE);
+        SharedPreferences allChansNames_SP = getActivity().getSharedPreferences("AllChannels_IdName_SP", Context.MODE_PRIVATE);
+        SharedPreferences allChansIcons_SP = getActivity().getSharedPreferences("AllChannels_IdIcon_SP", Context.MODE_PRIVATE);
         Map<String,?> keys = myChannels_IdName_SP.getAll();
         for(Map.Entry<String,?> entry : keys.entrySet()){
-            String id =  entry.getKey();
-            channelItemsList.add(new ChannelItem(id, "n", "M", new View.OnClickListener() {
+            currentId =  entry.getKey();
+            // enter: id , name , icon
+            channelItemsList.add(new ChannelItem(currentId, allChansNames_SP.getString(currentId, "-1"),
+                    allChansIcons_SP.getString(currentId, "-1"), new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(getActivity(), ChatActivity.class);
+                    // send the channel chat the channel id
+                    intent.putExtra("currentId", currentId);
                     startActivity(intent);
                 }
             }));
         }
-        channelItemsList.add(new ChannelItem("1048","shira","M",new View.OnClickListener() {
+        currentId = "1048";
+        channelItemsList.add(new ChannelItem(currentId, "shira","M",new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), ChatActivity.class);
+                intent.putExtra("currentId", currentId);
                 startActivity(intent);
             }
         }));

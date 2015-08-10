@@ -9,7 +9,6 @@ import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.params.ClientPNames;
 import org.apache.http.cookie.Cookie;
-import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.params.HttpParams;
 import java.io.ByteArrayOutputStream;
 
@@ -24,18 +23,15 @@ public class GetCookie extends AsyncTask<String, Void, Boolean> {
     private HttpResponse response;
     private String LINK_TO_GET_AUTHENTICATED;
     Context context;
-    private DefaultHttpClient httpclient;
 
     /**
      * constructor
-     * @param httpclient the url
      * @param appId the id tof the app
      * @param context of the device
      * @param act activity
      */
-    public GetCookie(DefaultHttpClient httpclient, String appId, Context context, Activity act) {
-        this.httpclient = httpclient;
-        params = httpclient.getParams();
+    public GetCookie(String appId, Context context, Activity act) {
+        params = HttpClientStatic.httpClient.getParams();
         this.appId = appId;
         this.context = context;
         SharedPreferences SRVRsharedPreferences = act.getSharedPreferences("MyServer", Context.MODE_PRIVATE);
@@ -53,7 +49,7 @@ public class GetCookie extends AsyncTask<String, Void, Boolean> {
             params.setBooleanParameter(ClientPNames.HANDLE_REDIRECTS, false);
 
             HttpGet httpGet = new HttpGet("http://" + appId + ".appspot.com/_ah/login?continue=http://" + appId + ".appspot.com/&auth=" + tokens[0]);
-            response = httpclient.execute(httpGet);
+            response = HttpClientStatic.httpClient.execute(httpGet);
             //HttpEntity entity = response.getEntity();
             //String text = getASCIIContentFromEntity(entity);
             ByteArrayOutputStream out = new ByteArrayOutputStream();
@@ -66,12 +62,11 @@ public class GetCookie extends AsyncTask<String, Void, Boolean> {
             }
 
             //check if we received the ACSID or the SACSID cookie, depends on http or https request
-            for(Cookie cookie : httpclient.getCookieStore().getCookies()) {
+            for(Cookie cookie : HttpClientStatic.httpClient.getCookieStore().getCookies()) {
                 if(cookie.getName().equals("ACSID") || cookie.getName().equals("SACSID")){
                     return true;
                 }
             }
-
         }  catch (Exception e) {
             e.printStackTrace();
             cancel(true);
@@ -87,6 +82,6 @@ public class GetCookie extends AsyncTask<String, Void, Boolean> {
      */
     protected void onPostExecute(Boolean result)
     {
-        new Auth(httpclient, context).execute(LINK_TO_GET_AUTHENTICATED);
+        new Login(context).execute(LINK_TO_GET_AUTHENTICATED);
     }
 }
